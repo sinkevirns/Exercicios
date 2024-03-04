@@ -24,6 +24,10 @@
         let displayValue = document.getElementById('display').value;
         let lastChar = displayValue.slice(-1);
 
+<<<<<<< HEAD
+=======
+        // Verifica se o último caractere é um número ou um parêntese de fechamento
+>>>>>>> dec57d86bc437febfd47da6e1ebc36efefefa2be
         if (!isNaN(parseInt(lastChar)) || lastChar === ')') {
             document.getElementById('display').value += ')';
         } else {
