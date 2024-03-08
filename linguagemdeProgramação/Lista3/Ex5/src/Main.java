@@ -6,9 +6,9 @@ public class Main {
         System.out.println("Digite o número que deseja fatorar:");
         int n = scanner.nextInt();
 
-        for (int x = 1; x <= n; x++) {
-            f *= x;
-            System.out.println(x + " = !" + f);
-        }
+            for (int i = n; i > 1; i--)
+                f = f * i;
+            System.out.println(n + " = !" + f);
+
     }
 }

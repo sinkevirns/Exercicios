@@ -1,20 +1,25 @@
-import java.util.*;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Digite um número:");
-        int np = scanner.nextInt();
-        String resposta;
+        long n;
+        boolean eprimo=true;
+        Scanner in = new Scanner(System.in);
         do {
-            if (np == 2) {
-                System.out.println("O número 2 é primo.");
-            } else if (np > 1 && np / np == 1 && np / 1 == np && np % 2 == 1) {
-                System.out.println("O número " + np + " é primo.");
-            } else {
-                System.out.println("O número " + np + " não é primo.");
+            System.out.println("Digite um numero: ");
+            n = in.nextLong();
+        }while(n<0);
+        if(n==1)
+            eprimo=false;
+        for(long i=n/2;i>1;i--){
+            if(n%i==0) {
+                eprimo = false;
+                break;
             }
-            System.out.println("Programa encerrado.");
-        } while (scanner.nextInt() == np);
-        scanner.close();
+        }
+        if(eprimo)
+            System.out.println("O número "+n+" é primo");
+        else
+            System.out.println("O número "+n+" não é primo");
     }
 }
