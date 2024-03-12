@@ -1,0 +1,25 @@
+int vermelho = 3;
+int amarelo = 4;
+int verde = 5;
+
+void setup() {
+  for (int i = 3; i <= 5; i++) {
+    pinMode(i, OUTPUT);
+  }       
+}
+
+void loop() {
+  float tempo = 5.0;
+  
+  while (tempo <= 5000) {
+    for (int i = 0; i < 3; i++) {
+      digitalWrite(vermelho + i, HIGH);
+      delay(tempo);
+      
+      digitalWrite(vermelho + i, LOW);
+      delay(tempo);
+    }
+    
+    tempo *= 1.15;
+  }
+}

@@ -1,0 +1,101 @@
+int displayNumber = 0;
+int button = 2;
+int a = 3;
+int b = 4;
+int c = 5;
+int d = 6;
+int e = 7;
+int f = 8;
+int g = 9;
+
+void setup() {
+  for (int i = 3; i <= 9; i++) {
+    pinMode(i, OUTPUT);
+  }
+  pinMode(button, INPUT);
+}
+
+void loop() {
+  bool buttonState = digitalRead(button);
+  if (buttonState == true) {
+      for (int i = 3; i <= 8; i++) {
+        digitalWrite(i, 1);
+      }
+      digitalWrite(g, 0);
+	  delay(500);
+      
+      for (int i = 3; i <= 9; i++) {
+        if (i == 4 || i == 5) {
+          digitalWrite(i, 1);
+        } else {
+          digitalWrite(i, 0);
+        }
+      }delay(500);
+
+      for (int i = 3; i <= 9; i++) {
+        if (i == 3 || i == 4 || i == 6 || i == 7 || i == 9) {
+          digitalWrite(i, 1);
+        } else {
+          digitalWrite(i, 0);
+        }
+      }delay(500);
+
+      for (int i = 3; i <= 9; i++) {
+        if (i == 3 || i == 4 || i == 5 || i == 6 || i == 9) {
+          digitalWrite(i, 1);
+        } else {
+          digitalWrite(i, 0);
+        }
+      }delay(500);
+
+      for (int i = 3; i <= 9; i++) {
+        if (i == 4 || i == 5 || i == 8 || i == 9) {
+          digitalWrite(i, 1);
+        } else {
+          digitalWrite(i, 0);
+        }
+      }delay(500);
+
+      for (int i = 3; i <= 9; i++) {
+        if (i == 3 || i == 5 || i == 6 || i == 8 || i == 9) {
+          digitalWrite(i, 1);
+        } else {
+          digitalWrite(i, 0);
+        }
+      }delay(500);
+
+      for (int i = 3; i <= 9; i++) {
+        if (i == 3 || i == 5 || i == 6 || i == 7 || i == 8 || i == 9) {
+          digitalWrite(i, 1);
+        } else {
+          digitalWrite(i, 0);
+        }
+      }delay(500);
+ 
+      for (int i = 3; i <= 9; i++) {
+        if (i == 3 || i == 4 || i == 5) {
+          digitalWrite(i, 1);
+        } else {
+          digitalWrite(i, 0);
+        }
+      }delay(500);
+ 
+      for (int i = 3; i <= 9; i++) {
+        digitalWrite(i, 1);
+      }delay(500);
+  
+      for (int i = 3; i <= 9; i++) {
+        if (i == 3 || i == 4 || i == 5 || i == 6 || i == 8 || i == 9) {
+          digitalWrite(i, 1);
+        } else {
+          digitalWrite(i, 0);
+        }
+      }delay(500);
+      displayNumber = 0;
+  	}
+ }
+
+
+
+
+  
