@@ -1,0 +1,40 @@
+int vermelho = 3;
+int amarelo = 4;
+int verde = 5;
+int c = 0;
+int button = 2;
+
+void setup() {
+for (int i = 3; i <= 9; i++) {
+    pinMode(i, OUTPUT);
+  }
+  pinMode(button, INPUT);
+}
+
+void loop() {
+  if (digitalRead(button) == HIGH) {
+    delay(150);
+    switch (c) {
+      case 1:
+        digitalWrite(vermelho, LOW); // Desligar o LED vermelho
+        digitalWrite(verde, HIGH); // Ligar o LED verde
+        delay(500);
+        break;
+      case 2:
+        digitalWrite(verde, LOW); // Desligar o LED verde
+        digitalWrite(amarelo, HIGH); // Ligar o LED amarelo
+        delay(500);
+        break;
+      case 3:
+        digitalWrite(amarelo, LOW); // Desligar o LED amarelo
+        digitalWrite(vermelho, HIGH); // Ligar o LED vermelho
+        delay(500);
+        break;
+    }
+
+    c += 1;
+    if (c > 3) {
+      c = 0;
+    }
+  }
+}
