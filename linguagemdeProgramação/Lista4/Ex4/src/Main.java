@@ -1,36 +1,30 @@
-import java.util.*;
-
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
+
         Scanner in = new Scanner(System.in);
-        int[] maior = new int[1];
-        int[] menor = new int[]{0};
-        int[] n;
-        int i;
-        int posMaior = 0;
-        int posMenor = 0;
 
-        do {
-            for (i = 0; i < 10; i++) {
-                System.out.println("Digite o " + (i + 1) + "º número:");
-                n = new int[]{in.nextInt()};
+        int[] vector = new int[10];
+        int [] bigger = new int[2];
+        int [] smaller = new int[2];
 
-                if (i == 0) {
-                    maior = n;
-                    menor = n;
-                } else {
-                    if (n[0] > maior[0]) {
-                        maior = n;
-                        posMaior = i;
-                    }
-                    if (n[0] < menor[0]) {
-                        menor = n;
-                        posMenor = i;
-                    }
-                }
+        for (int i = 0; i < vector.length; i++) {
+            System.out.println("Digite o " + (i+1) + "º número:");
+            vector[i] = in.nextInt();
+        }
+        bigger[0] = vector[0];
+        smaller[0] = vector[0];
+        for (int i = 0; i < vector.length; i++) {
+            if (vector[i] > bigger[0]){
+                bigger[0] = vector[i];
+                bigger[1] = i;
             }
-        } while (i < 10);
-
-        System.out.print("O maior número digitado é " + maior[0] + " na posição " + (posMaior + 1) + "\nO menor número digitado é " + menor[0] + " na posição " + (posMenor + 1));
+            if (vector[i]<smaller[0]){
+                smaller[0]=vector[i];
+                smaller[1]= i;
+            }
+        }
+        System.out.println("Maior valor = " + bigger[0] + " na " + (bigger[1] + 1) + "ª posição.");
+        System.out.println("Menor valor = " + smaller[0] + " na " + (smaller[1] + 1) + "ª posição.");
     }
 }

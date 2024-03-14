@@ -1,13 +1,21 @@
 public class Main {
     public static void main(String[] args) {
-        int[] v1 = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        System.out.println("Vetor:");
-        for (int i = 0; i < v1.length; i++) {
-            System.out.println(v1[i]);
+        int [] vector = {10,20,30,40,50,60,70,80,90,100};
+        int aux;
+
+        for (int n: vector) {
+            System.out.print(n + " ");
         }
-        System.out.println("Sequência inversa:");
-        for (int i = v1.length - 1; i >= 0; i--) {
-            System.out.println(v1[i]);
+
+        for(int i=0;i<vector.length/2;i++){
+            aux=vector[i];
+            vector[i]=vector[(vector.length-1)-i];
+            vector[(vector.length-1)-i]=aux;
+        }
+
+        System.out.println();
+        for (int n: vector) {
+            System.out.print(n + " ");
         }
     }
 }

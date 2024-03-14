@@ -1,29 +1,24 @@
 import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
 
-        int[] vetor = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        Scanner in = new Scanner(System.in);
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Digite um número inteiro: ");
-        int numero = scanner.nextInt();
-        scanner.close();
+        int[] vector = {0,1,2,3,4,5,6,7,8,9};
+        int value;
+        boolean not_found = true;
 
-        int posicao = buscarNumero(vetor, numero);
+        System.out.println("Digite um valor: ");
+        value = in.nextInt();
 
-        if (posicao != -1) {
-            System.out.println("O número " + numero + " foi encontrado na posição " + posicao + " do vetor.");
-        } else {
-            System.out.println("Valor não encontrado.");
-        }
-    }
-    public static int buscarNumero(int[] vetor, int numero) {
-        for (int i = 0; i < vetor.length; i++) {
-            if (vetor[i] == numero) {
-                return i;
+        for (int i = 0; i < vector.length; i++) {
+            if (vector[i]==value) {
+                System.out.println("Valor " + value + " encontrado na " + (i+1) +"ª posição: ");
+                not_found = false;
+                break;
             }
         }
-        return -1;
+        if (not_found)
+            System.out.println("Valor " + value + " não encontrado.");
     }
 }
