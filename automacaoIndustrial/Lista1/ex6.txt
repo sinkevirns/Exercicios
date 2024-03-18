@@ -16,18 +16,18 @@ void loop() {
     delay(150);
     switch (c) {
       case 1:
-        digitalWrite(vermelho, LOW); // Desligar o LED vermelho
-        digitalWrite(verde, HIGH); // Ligar o LED verde
+        digitalWrite(vermelho, LOW);
+        digitalWrite(verde, HIGH); 
         delay(500);
         break;
       case 2:
-        digitalWrite(verde, LOW); // Desligar o LED verde
-        digitalWrite(amarelo, HIGH); // Ligar o LED amarelo
+        digitalWrite(verde, LOW); 
+        digitalWrite(amarelo, HIGH); 
         delay(500);
         break;
       case 3:
-        digitalWrite(amarelo, LOW); // Desligar o LED amarelo
-        digitalWrite(vermelho, HIGH); // Ligar o LED vermelho
+        digitalWrite(amarelo, LOW); 
+        digitalWrite(vermelho, HIGH); 
         delay(500);
         break;
     }
