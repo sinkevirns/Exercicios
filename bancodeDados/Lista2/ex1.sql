@@ -21,27 +21,27 @@ SELECT * FROM Livros
 
 CREATE TABLE Autores(
 	id_autor SERIAL PRIMARY KEY,
-	nome_autor VARCHAR(100),
+	nome_autor VARCHAR(100)
 )
 
-INSERT INTO Autores (nome_projeto, descricao) VALUES
-('Projeto Renovação', 'Reestruturação de processos para aumentar a eficiência operacional após desafios recentes.'),
-('TechBoost', 'Pesquisa e desenvolvimento de novas tecnologias para impulsionar a inovação da empresa.'),
-('Expansão Regional', 'Iniciativa para abrir novos mercados e diversificar a base de clientes.'),
-('Agilidade Corporativa', 'Implementação de metodologias ágeis para melhorar a colaboração e a entrega de projetos.'),
-('Sustentabilidade Verde', 'Projeto focado em reduzir a pegada de carbono e promover práticas eco-friendly.'),
-('Modernização de TI', 'Atualização da infraestrutura de TI para fortalecer a segurança e a capacidade de processamento.'),
-('Desenvolvimento de Talentos', 'Programa para capacitar e engajar os funcionários, promovendo um ambiente de trabalho de alto desempenho.'),
-('Análise de Mercado', 'Identificação de tendências emergentes e oportunidades de negócios.'),
-('Melhoria da Comunicação Interna', 'Aperfeiçoamento dos processos de comunicação para uma cultura organizacional mais harmoniosa.'),
-('Experiência do Cliente', 'Aprimoramento do atendimento ao cliente para fortalecer os relacionamentos e a fidelidade.')
+INSERT INTO Autores (nome_autor) VALUES
+('J.R.R. Tolkien'),
+('J.K. Rowling'),
+('Gabriel García Márquez'),
+('Miguel de Cervantes'),
+('Antoine de Saint-Exupéry'),
+('Herman Melville'),
+('Jane Austen'),
+('Fiódor Dostoiévski'),
+('C.S. Lewis'),
+('Dante Alighieri')
 
 SELECT * FROM Autores 
 
 CREATE TABLE Livros_Autores(
-	id_func INT,
-	CONSTRAINT fk_func FOREIGN KEY(id_func) REFERENCES Funcionarios(id_func),
-	id_projeto INT,
-	CONSTRAINT fk_proj FOREIGN KEY(id_projeto) REFERENCES Projetos(id_projeto)
+	isbn VARCHAR,
+	CONSTRAINT fk_isbn FOREIGN KEY(isbn) REFERENCES Livros(isbn),
+	id_autor INT,
+	CONSTRAINT fk_autor FOREIGN KEY(id_autor) REFERENCES Autores(id_autor)
 )
-SELECT * FROM Funcionarios_Projetos
+SELECT * FROM Livros_Autores
