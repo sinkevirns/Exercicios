@@ -38,4 +38,4 @@ INSERT INTO Funcionarios (nomeFuncionario, dataAdmissao, cargo) VALUES
 ('Rafaela Souza', '2023-05-20', 'Analista'),
 ('Fernando Gomes', '2022-12-15', 'Analista')
 
-SELECT * FROM Funcionarios
+SELECT * FROM Funcionarios 
