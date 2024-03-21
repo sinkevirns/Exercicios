@@ -19,30 +19,42 @@ INSERT INTO Pacientes (nomePaciente, nascimento) VALUES
 SELECT * FROM Pacientes
 
 CREATE TABLE Medicos(
-	crm VARCHAR(20) PRIMARY KEY,
+	crm SERIAL PRIMARY KEY,
 	nomeMedico VARCHAR(100),
 	especializacao VARCHAR(100)
 )
 
-INSERT INTO Medicos (crm,nomeMedico,especializacao) VALUES
-('1234567', 'Dr. Carlos Silva', 'Cardiologia'),
-('2345678', 'Dra. Mariana Oliveira', 'Ortopedia'),
-('3456789', 'Dr. Rafaela Santos', 'Pediatria'),
-('4567890', 'Dr. Fernando Costa', 'Dermatologia'),
-('5678901', 'Dra. Patrícia Rodrigues', 'Ginecologia'),
-('6789012', 'Dr. Juliano Ferreira', 'Oftalmologia'),
-('7890123', 'Dra. Camila Almeida', 'Neurologia'),
-('8901234', 'Dr. Bruno Carvalho', 'Psiquiatria'),
-('9012345', 'Dra. Aline Souza', 'Urologia'),
-('0123456', 'Dr. Gustavo Pereira', 'Oncologia')
+INSERT INTO Medicos (nomeMedico,especializacao) VALUES
+('Dr. Carlos Silva', 'Cardiologia'),
+('Dra. Mariana Oliveira', 'Ortopedia'),
+('Dr. Rafaela Santos', 'Pediatria'),
+('Dr. Fernando Costa', 'Dermatologia'),
+('Dra. Patrícia Rodrigues', 'Ginecologia'),
+('Dr. Juliano Ferreira', 'Oftalmologia'),
+('Dra. Camila Almeida', 'Neurologia'),
+('Dr. Bruno Carvalho', 'Psiquiatria'),
+('Dra. Aline Souza', 'Urologia'),
+('Dr. Gustavo Pereira', 'Oncologia')
 
 SELECT * FROM Medicos
 
 CREATE TABLE Registros(
 	idRegistro SERIAL PRIMARY KEY,
 	idPaciente INT REFERENCES Pacientes(idPaciente),
-	crm VARCHAR REFERENCES Medicos (crm),
+	crm SERIAL REFERENCES Medicos (crm),
 	dataRegistro DATE
 )
 
 SELECT * FROM Registros
+
+--a. Listar todos os pacientes de um médico específico.
+SELECT nomePaciente, nomeMedico FROM Pacientes INNER JOIN Medicos 
+ON Pacientes.idPaciente = Medicos.crm
+WHERE nomeMedico = 'Dr. Carlos Silva'
+--b. Encontrar todos os médicos de um paciente específico.
+SELECT nomeMedico, nomePaciente FROM Medicos INNER JOIN Pacientes
+ON Medicos.crm = Pacientes.idPaciente
+WHERE nomeMedico = 'Dra. Aline Souza'
+--c. Contar o número médio de pacientes por médico.
+SELECT AVG(idPaciente) AS idPaciente
+FROM Pacientes

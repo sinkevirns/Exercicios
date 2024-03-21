@@ -19,9 +19,9 @@ INSERT INTO Alunos (nomeAluno, nascimento) VALUES
 SELECT * FROM Alunos
 
 CREATE TABLE Alunos_Turmas(
-	idAluno INT,
+	idAluno SERIAL,
 	CONSTRAINT fkAlunos FOREIGN KEY(idAluno) REFERENCES Alunos(idAluno),
-	idTurma INT,
+	idTurma SERIAL,
 	CONSTRAINT fkTurma FOREIGN KEY(idTurma) REFERENCES Turmas(idTurma)
 )
 
@@ -29,7 +29,7 @@ SELECT * FROM Alunos_Turmas
 
 CREATE TABLE Turmas(
 	idTurma SERIAL PRIMARY KEY,
-	idCurso INTEGER, 
+	idCurso SERIAL, 
 	FOREIGN KEY (idCurso) REFERENCES Cursos(idCursos),
 	idProfessores SERIAL
 )
@@ -54,3 +54,14 @@ INSERT INTO Cursos (nomeCurso) VALUES
 ('Mindfulness para o Dia a Dia')
 
 SELECT * FROM Cursos
+
+--a. Listar todos os alunos matriculados em uma turma específica.
+SELECT nomeAluno, idTurma FROM Alunos INNER JOIN Turmas
+ON Alunos.idAluno = Turmas.idTurma
+--b. Encontrar todos os cursos ministrados em uma turma específica.
+SELECT nomeCurso, idTurma FROM Cursos INNER JOIN Turmas
+ON Cursos.idCursos = Turmas.idTurma
+--c. Contar o número de alunos em cada turma.
+SELECT idTurma, COUNT(idAluno) AS numero_de_alunos
+FROM Alunos_Turmas
+GROUP BY idTurma

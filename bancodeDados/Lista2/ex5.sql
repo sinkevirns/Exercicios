@@ -39,3 +39,18 @@ INSERT INTO Funcionarios (nomeFuncionario, dataAdmissao, cargo) VALUES
 ('Fernando Gomes', '2022-12-15', 'Analista')
 
 SELECT * FROM Funcionarios 
+
+--a. Listar todos os funcionários de um departamento específico.
+SELECT nomeFuncionario, nomeDepartamento FROM Funcionarios INNER JOIN Departamentos
+ON Funcionarios.idFuncionario = Departamentos.idDepartamento
+WHERE nomeDepartamento = 'Departamento de Recursos Humanos'
+--b. Encontrar o departamento em que um funcionário específico trabalha.
+SELECT nomeFuncionario, nomeDepartamento FROM Funcionarios INNER JOIN Departamentos
+ON Funcionarios.idFuncionario = Departamentos.idDepartamento
+WHERE nomeFuncionario = 'Carlos Pereira'
+--c. Calcular o número total de funcionários gerenciados por cada gerente.
+SELECT f.nomeFuncionario AS gerente, d.nomeDepartamento, COUNT(*) AS numero_de_funcionarios
+FROM Funcionarios f
+JOIN Departamentos d ON f.idDepartamento = d.idDepartamento
+WHERE f.cargo = 'Gerente'
+GROUP BY f.nomeFuncionario, d.nomeDepartamento
