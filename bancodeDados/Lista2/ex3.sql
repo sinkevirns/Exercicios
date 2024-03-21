@@ -45,3 +45,14 @@ CREATE TABLE Funcionarios_Projetos(
 	CONSTRAINT fk_proj FOREIGN KEY(id_projeto) REFERENCES Projetos(id_projeto)
 )
 SELECT * FROM Funcionarios_Projetos
+
+--a. Listar todos os funcionários associados a um projeto específico.
+SELECT nome_func, nome_projeto FROM Funcionarios INNER JOIN Projetos 
+ON Funcionarios.id_func = Projetos.id_projeto
+--b. Encontrar todos os projetos em que um funcionário específico está envolvido.
+SELECT nome_projeto, nome_func FROM Projetos INNER JOIN Funcionarios 
+ON Projetos.id_projeto = Funcionarios.id_func
+WHERE nome_projeto = 'TechBoost'
+--c. Calcular a média de funcionários por projeto.
+SELECT AVG(id_func) AS id_projeto
+FROM Funcionarios
