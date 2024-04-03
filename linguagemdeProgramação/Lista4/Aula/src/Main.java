@@ -156,6 +156,8 @@ public class Main {
     }
 }
 */
+
+/*
 //Ex7
 public class Main {
     public static void main(String[] args) {
@@ -192,3 +194,88 @@ public class Main {
 
     }
 }
+*/
+
+/*
+//ex10
+public class Main {
+    public static void main(String[] args) {
+        int [][] a ={{5,6},
+                {8,7},
+                {3,3}};
+
+        int [][] b = {{9,1},
+                {6,1}};
+
+        int [][] c = new int [3][2];
+
+        for(int i=0;i<a.length;i++){
+            c[i][0]=a[i][0]*b[0][0]+a[i][1]*b[1][0];
+            c[i][1]=a[i][0]*b[0][1]+a[i][1]*b[1][1];
+        }
+
+        for(int [] line : c) {
+            for(int value:line)
+                System.out.print(value + " ");
+            System.out.println();
+        }
+    }
+}
+*/
+
+/*
+//ex11
+public class Main {
+    public static void main(String[] args) {
+        int size_lines,size_columns;
+
+        Scanner in = new Scanner(System.in);
+        System.out.println("Digite o tamanho da matriz 1 (separado por espaço):");
+        size_lines = in.nextInt();
+        size_columns = in.nextInt();
+
+        int [][]a = new int[size_lines][size_columns];
+
+        System.out.println("Digite o tamanho da matriz 2 (separado por espaço):");
+        size_lines = in.nextInt();
+        size_columns = in.nextInt();
+
+        int [][]b = new int[size_lines][size_columns];
+
+        if(a[0].length!=b.length){
+            System.out.println("Impossível multiplicar as matrizes");
+        }else{
+            int [][]c = new int[a.length][b[0].length];
+
+            for(int i=0;i<a.length;i++){
+                for(int j=0;j<a[0].length;j++){
+                    System.out.println("Digite a"+i+j+":");
+                    a[i][j]=in.nextInt();
+                }
+            }
+
+            for(int i=0;i<b.length;i++){
+                for(int j=0;j<b[0].length;j++){
+                    System.out.println("Digite b"+i+j+":");
+                    b[i][j]=in.nextInt();
+                }
+            }
+
+            for(int i=0;i<a.length;i++){
+                for(int j=0;j<b[0].length;j++){
+                    for(int k=0;k<a[0].length;k++){
+                        c[i][j]+=a[i][k]*b[k][j];
+                        System.out.println("c"+i+j+" a"+i+k+" b"+k+j);
+                    }
+                }
+            }
+
+            for(int [] line : c) {
+                for(int value:line)
+                    System.out.print(value + " ");
+                System.out.println();
+            }
+        }
+    }
+}
+*/
