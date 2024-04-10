@@ -20,51 +20,41 @@ function appendToDisplay(value) {
 }
 
 function operator(value) {
+    
+
+    // alert('Fase 1:\n' + numbers_stack + '\n' + operator_stack);
     if (!number_complete) {
-      addNumberToStack();
-      while (lenghtOfOperatorStack() > 0 && !precedence(topOfOperatorStack(), value)) {
-        let result = partialCalculate();
-        addResultToStack(result);
-      }
+        addNumberToStack();
+        document.getElementById("expression").value += ' ' + topOfOperatorNumber() + ' ' + value;
+        // alert('Fase 2:\n' + numbers_stack + '\n' + operator_stack);
+        while (lenghtOfOperatorStack()>0 && !precedence(topOfOperatorStack(), value)) {
+            let result = partialCalculate();
+            addResultToStack(result);
+            // alert('Fase 3:\n' + numbers_stack + '\n' + operator_stack);
+        }
+
     } else {
-      getOperatorFromStack(value);
+        getOperatorFromStack(value);
     }
     addOperatorToStack(value);
-    updateHistory();
-  }
+    // alert('Fase 4:\n' + numbers_stack + '\n' + operator_stack);
+
+}
 
 function calculate() {
     addNumberToStack();
+    document.getElementById("expression").value += ' ' + topOfOperatorNumber() + ' =';
     let result = 0;
-    while (lenghtOfOperatorStack() > 0) {
-      result = partialCalculate();
-      addResultToStack(result);
-    }
+    while (lenghtOfOperatorStack()>0) {
+        result = partialCalculate();
+        addResultToStack(result);
+    } 
     document.getElementById("display").value = result;
-    updateHistory();
-  }
-
-  function updateHistory() {
-    let historyText = '';
-    for (let i = 0; i < numbers_stack.length; i++) {
-      historyText += numbers_stack[i];
-      if (operator_stack[i]) {
-        historyText += ' ' + operator_stack[i] + ' ';
-      }
-    }
-    document.getElementById("history-text").innerText = historyText;
-  }
+}
 
 function clearDisplay() {
     document.getElementById("display").value = "";
     number_complete = false;
-}
-
-function clearHistory()
-{
-    numbers_stack = [];
-    operator_stack = [];
-    document.getElementById("history-text").innerText = "";
 }
 
 function backspace() {
@@ -105,7 +95,8 @@ function precedence(op1, op2) {
         ['+', 1],
         ['-', 1],
         ['*', 2],
-        ['/', 2]
+        ['/', 2],
+        ['**', 3]
     ]);
     return operators.get(op2) > operators.get(op1); 
 }
@@ -114,16 +105,10 @@ function topOfOperatorStack() {
     return operator_stack[operator_stack.length-1];
 }
 
+function topOfOperatorNumber() {
+    return numbers_stack[numbers_stack.length-1];
+}
+
 function lenghtOfOperatorStack() {
     return operator_stack.length;
-}
-function addParentheses() {
-    let displayValue = document.getElementById('display').value;
-    let lastChar = displayValue.slice(-1);
-
-    if (!isNaN(parseInt(lastChar)) || lastChar === ')') {
-        document.getElementById('display').value += ')';
-    } else {
-        document.getElementById('display').value += '(';
-    }
 }
