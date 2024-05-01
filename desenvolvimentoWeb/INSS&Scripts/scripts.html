@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compilador Web</title>
+  <!-- Adicione o CSS do editor de código -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/codemirror.min.css">
+  <!-- Adicione o JavaScript do editor de código -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/codemirror.min.js"></script>
+  <!-- Adicione os modos de syntax do CodeMirror para HTML, CSS e JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/mode/htmlmixed/htmlmixed.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/mode/css/css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/mode/javascript/javascript.min.js"></script>
+  <!-- Adicione um tema ao editor de código -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/theme/material.min.css">
+  <style>
+    /* Estilos para o editor de código */
+    .CodeMirror {
+      height: 100px;
+      border: 1px solid #ddd;
+      margin-bottom: 10px;
+    }
+    #resultado {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Compilador Web</h1>
+    <!-- Área para inserir o código HTML -->
+    <h2>HTML</h2>
+    <textarea id="html" class="code"><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hello, world!</h1>
+  <script>
+    console.log('Hello from JavaScript!');
+  </script>
+</body>
+</html></textarea>
+    <!-- Área para inserir o código CSS -->
+    <h2>CSS</h2>
+    <textarea id="css" class="code">/* Insira seu código CSS aqui */</textarea>
+    <!-- Área para inserir o código JavaScript -->
+    <h2>JavaScript</h2>
+    <textarea id="js" class="code">/* Insira seu código JavaScript aqui */</textarea>
+    <!-- Botão para executar o código -->
+    <button onclick="executarCodigo()">Executar</button>
+    <!-- Área para exibir o resultado -->
+    <h2>Resultado</h2>
+    <div id="resultado"></div>
+  </div>
+  <script>
+    // Inicialize os editores de código
+    var htmlEditor = CodeMirror.fromTextArea(document.getElementById('html'), {
+      mode: 'htmlmixed',
+      theme: 'material',
+      lineNumbers: true
+    });
+    var cssEditor = CodeMirror.fromTextArea(document.getElementById('css'), {
+      mode: 'css',
+      theme: 'material',
+      lineNumbers: true
+    });
+    var jsEditor = CodeMirror.fromTextArea(document.getElementById('js'), {
+      mode: 'javascript',
+      theme: 'material',
+      lineNumbers: true
+    });
+
+    // Função para executar o código
+    function executarCodigo() {
+      var resultado = document.getElementById('resultado');
+      resultado.innerHTML = htmlEditor.getValue(); // Inclua o HTML
+
+      // Crie um elemento <style> para incluir o CSS
+      var style = document.createElement('style');
+      style.innerHTML = cssEditor.getValue();
+      resultado.appendChild(style);
+
+      // Execute o JavaScript
+      var script = document.createElement('script');
+      script.innerHTML = jsEditor.getValue();
+      resultado.appendChild(script);
+    }
+  </script>
+</body>
+</html>
