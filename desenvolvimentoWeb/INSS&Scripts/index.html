@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CALCULADORAS</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body class="body">
+  <header class="header">CALCULADORAS</header>
+  <nav class="navbar">
+    <ul>
+      <li><a href="calculadora.html" data-page="calculadora.html">Calculadora</a></li>
+      <li><a href="inss.html" data-page="inss.html">INSS</a></li>
+      <li><a href="scripts.html" data-page="scripts.html">Scripts</a></li>
+    </ul>
+  </nav>
+  <main class="main">
+  </main>
+
+  <script>
+    $(document).ready(function(){
+      $('.navbar a').click(function(e){
+        e.preventDefault(); // Evita o comportamento padrão do link (navegação)
+
+        var url = $(this).attr('href'); // Obtém o URL do link clicado
+        $('.main').load(url); // Carrega o conteúdo da página na main
+      });
+    });
+  </script>
+</body>
+</html>
