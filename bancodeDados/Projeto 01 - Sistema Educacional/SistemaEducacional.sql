@@ -158,8 +158,10 @@ INSERT INTO Departamentos (departamento, coordenador, certificacao) VALUES
 ('Departamento de Administração', 'Pedro Costa', 'CGA');
 
 -- Dado o RA ou o Nome do Aluno, buscar no BD todos os demais dados do aluno.
-SELECT * FROM Alunos
-WHERE ra = '123456' OR nome = 'João Silva';
+SELECT Alunos.*, Contato.*, Endereco.* FROM Alunos
+JOIN Contato ON Alunos.idContato = Contato.idContato
+JOIN Endereco ON Alunos.idEndereco = Endereco.idEndereco
+WHERE Alunos.ra = '1' OR Alunos.nome = 'João Silva';
 
 -- Dado o nome de um departamento, exibir o nome de todos os cursos associados a ele.
 SELECT nomeCurso FROM Curso
