@@ -1,223 +1,182 @@
 -- DDL
--- Criando a tabela Alunos
-CREATE TABLE Alunos (
-	cpf VARCHAR(14) PRIMARY KEY,
-    ra SERIAL,
+-- Tabela alunos
+CREATE TABLE alunos (
+    cpf VARCHAR(14) PRIMARY KEY,
     nome VARCHAR(100),
-    idade INT,
-    ativo BOOLEAN,
-    idContato SERIAL,
-    idEndereco SERIAL,
-    FOREIGN KEY (idContato) REFERENCES Contato(idContato),
-    FOREIGN KEY (idEndereco) REFERENCES Endereco(idEndereco)
-);
-
--- DML
--- Populando a tabela Alunos
-INSERT INTO Alunos (cpf, nome, idade, ativo) VALUES
-('123.456.789-00', 'João Silva', 20, TRUE),
-('987.654.321-00', 'Maria Souza', 22, TRUE),
-('111.222.333-44', 'Carlos Oliveira', 21, TRUE),
-('555.666.777-88', 'Ana Santos', 25, TRUE),
-('999.888.777-66', 'Pedro Costa', 23, TRUE);
-
--- DDL
--- Criando a tabela Contato
-CREATE TABLE Contato (
-    idContato SERIAL PRIMARY KEY,
-	celular VARCHAR (20),
-	email VARCHAR(100),
-    telefone VARCHAR(20)
-);
-
--- DML
--- Populando a tabela Contato
-INSERT INTO Contato (celular, email, telefone) VALUES
-('(11) 91234-5678', 'joao.silva@email.com', '(11) 1234-5678'),
-('(22) 99876-5432', 'maria.souza@email.com', '(22) 9876-5432'),
-('(33) 98765-4321', 'carlos.oliveira@email.com', '(33) 8765-4321'),
-('(44) 97654-3210', 'ana.santos@email.com', '(44) 7654-3210'),
-('(55) 96543-2109', 'pedro.costa@email.com', '(55) 6543-2109');
-
--- DDL
--- Criando a tabela ContatoEndereco
-CREATE TABLE ContatoEndereco (
-    idContato SERIAL,
-    idEndereco SERIAL,
-    FOREIGN KEY (idContato) REFERENCES Contato(idContato),
-    FOREIGN KEY (idEndereco) REFERENCES Endereco(idEndereco)
-);
-
--- DDL
--- Criando a tabela Endereco
-CREATE TABLE Endereco (
-    idEndereco SERIAL PRIMARY KEY,
+    nascimento DATE,
     rua VARCHAR(100),
-	numero INT,
-    cidade VARCHAR(100),
-    estado VARCHAR(100),
-    cep VARCHAR(10)
+    numero VARCHAR(10),
+    bairro VARCHAR(50),
+    cidade VARCHAR(50),
+    estado VARCHAR(2),
+    cep VARCHAR(9),
+    pais VARCHAR(50)
+); 
+
+-- Tabela telefones
+CREATE TABLE telefones (
+    cpf VARCHAR(14) REFERENCES alunos,
+    ddd VARCHAR(3),
+    telefone VARCHAR(9)
+);
+
+-- Tabela emails
+CREATE TABLE emails (
+    cpf VARCHAR(14) REFERENCES alunos,
+    email VARCHAR(100),
+    dominio VARCHAR(50)
+);
+
+-- Tabela departamentos
+CREATE TABLE departamentos (
+    iddpto SERIAL PRIMARY KEY,
+    sigla VARCHAR(10),
+    nome VARCHAR(100)
+);
+
+-- Tabela cursos
+CREATE TABLE cursos (
+    idcursos SERIAL PRIMARY KEY,
+    iddpto SERIAL REFERENCES departamentos,
+    nome VARCHAR(100)
+);
+
+-- Tabela matriculas
+CREATE TABLE matriculas (
+    ra SERIAL PRIMARY KEY,
+    cpf VARCHAR(14) REFERENCES alunos,
+    status BOOLEAN,
+    idcurso SERIAL REFERENCES cursos
+);
+
+-- Tabela relacional matriculadisciplina
+CREATE TABLE matriculadisciplina (
+    ra SERIAL REFERENCES matriculas,
+    iddisciplina SERIAL REFERENCES disciplina
+);
+
+-- Tabela disciplina
+CREATE TABLE disciplina (
+    iddisciplina SERIAL PRIMARY KEY,
+    nome VARCHAR(100),
+    optativa BOOLEAN
+);
+
+-- Tabela relacional cursodisciplina
+CREATE TABLE cursodisciplina (
+    idcurso SERIAL REFERENCES cursos,
+    iddisciplina SERIAL REFERENCES disciplina
 );
 
 -- DML
--- Populando a tabela Endereco
-INSERT INTO Endereco (rua, numero, cidade, estado, cep) VALUES
-('Rua A', 123, 'São Paulo', 'SP', '01234-567'),
-('Avenida B', 456, 'Rio de Janeiro', 'RJ', '45678-901'),
-('Rua C', 789, 'Belo Horizonte', 'MG', '89012-345'),
-('Avenida D', 101, 'Porto Alegre', 'RS', '21098-765'),
-('Rua E', 1122, 'Brasília', 'DF', '54321-098');
+-- Populando tabela alunos
+INSERT INTO alunos (cpf, nome, nascimento, rua, numero, bairro, cidade, estado, cep, pais) VALUES 
+('123.456.789-10', 'João da Silva', '1990-05-15', 'Rua A', '123', 'Centro', 'São Paulo', 'SP', '12345-678', 'Brasil'),
+('987.654.321-10', 'Maria Oliveira', '1992-10-20', 'Rua B', '456', 'Vila Madalena', 'Rio de Janeiro', 'RJ', '54321-987', 'Brasil');
 
--- DDL
--- Criando a tabela AlunoDisciplina
-CREATE TABLE AlunoDisciplina (
-    cpf VARCHAR(14),
-    idDisciplina SERIAL,
-    FOREIGN KEY (cpf) REFERENCES Alunos(cpf),
-    FOREIGN KEY (idDisciplina) REFERENCES Disciplina(idDisciplina)
-);
+-- Populando tabela telefones
+INSERT INTO telefones (cpf, ddd, telefone) 
+VALUES 
+('123.456.789-10', '11', '999999999'),
+('123.456.789-10', '11', '888888888'),
+('987.654.321-10', '21', '777777777');
 
--- DML
--- Populando a tabela AlunoDisciplina
-INSERT INTO AlunoDisciplina (cpf) VALUES
-('123.456.789-00'),
-('987.654.321-00'),
-('111.222.333-44'),
-('555.666.777-88'),
-('999.888.777-66');
+-- Populando tabela email
+INSERT INTO emails (cpf, email, dominio) 
+VALUES 
+('123.456.789-10', 'joao@example.com', 'example.com'),
+('987.654.321-10', 'maria@example.com', 'example.com');
 
--- DDL
--- Criando a tabela Disciplina
-CREATE TABLE Disciplina (
-    idDisciplina SERIAL PRIMARY KEY,
-    nomeDisciplina VARCHAR(100),
-    cargaHoraria INT,
-    opcional BOOLEAN
-);
+-- Populando tabela departamentos
+INSERT INTO departamentos (sigla, nome) VALUES 
+('DPTO1', 'Departamento de Engenharia'),
+('DPTO2', 'Departamento de Ciências da Computação');
 
--- DML
--- Populando a tabela Disciplina
-INSERT INTO Disciplina (nomeDisciplina, cargaHoraria, opcional) VALUES
-('Introdução à Programação', 80, FALSE),
-('Cálculo I', 90, FALSE),
-('Eletrônica Básica', 100, FALSE),
-('Literatura Brasileira', 60, TRUE),
-('Estatística', 80, FALSE);
+-- Populando tabela cursos
+INSERT INTO cursos (iddpto, nome) VALUES 
+(1, 'Engenharia Civil'),
+(1, 'Engenharia Elétrica'),
+(2, 'Ciência da Computação'),
+(2, 'Sistemas de Informação');
 
--- DDL
--- Criando a tabela DisciplinaCurso
-CREATE TABLE DisciplinaCurso (
-    idDisciplina SERIAL,
-    nomeCurso VARCHAR(100),
-    FOREIGN KEY (idDisciplina) REFERENCES Disciplina(idDisciplina),
-    FOREIGN KEY (nomeCurso) REFERENCES Curso(nomeCurso)
-);
+-- Populando tabela matriculas
+INSERT INTO matriculas (cpf, status, idcurso) VALUES 
+('123.456.789-10', true, 1),
+('987.654.321-10', true, 3);
 
--- DML
--- Populando a tabela DisciplinaCurso
-INSERT INTO DisciplinaCurso (nomeCurso) VALUES
-('Ciência da Computação'),
-('Matemática Aplicada'),
-('Engenharia Elétrica'),
-('Letras Português'),
-('Administração de Empresas');
+-- Populando tabela disciplina
+INSERT INTO disciplina (nome, optativa) VALUES 
+('Matemática', false),
+('Física', false),
+('Programação I', false),
+('Programação II', false);
 
--- DDL
--- Criando a tabela Curso
-CREATE TABLE Curso (
-    nomeCurso VARCHAR(100) PRIMARY KEY,
-    cargaHoraria INT,
-    departamento VARCHAR(100),
-    FOREIGN KEY (departamento) REFERENCES Departamentos(departamento)
-);
+-- Populando tabela relacional matriculadisciplina
+INSERT INTO matriculadisciplina (ra, iddisciplina) 
+VALUES 
+(1, 3),
+(2, 4);
 
--- DML
--- Populando a tabela Curso
-INSERT INTO Curso (nomeCurso, cargaHoraria, departamento) VALUES
-('Ciência da Computação', 4000, 'Departamento de Ciências da Computação'),
-('Matemática Aplicada', 3600, 'Departamento de Matemática'),
-('Engenharia Elétrica', 4200, 'Departamento de Engenharia Elétrica'),
-('Letras Português', 3000, 'Departamento de Letras'),
-('Administração de Empresas', 3500, 'Departamento de Administração');
+-- Populando tabela relacional cursodisciplina
+INSERT INTO cursodisciplina (idcurso, iddisciplina) 
+VALUES 
+(1, 1),
+(1, 2),
+(3, 3),
+(3, 4); 
 
--- DDL
--- Criando a tabela Departamentos
-CREATE TABLE Departamentos (
-    departamento VARCHAR(100) PRIMARY KEY,
-	coordenador VARCHAR(100),
-	certificacao VARCHAR (5)
-);
-
--- DML
--- Populando a tabela Departamentos
-INSERT INTO Departamentos (departamento, coordenador, certificacao) VALUES
-('Departamento de Ciências da Computação', 'João Silva', 'ABNT'),
-('Departamento de Matemática', 'Maria Souza', 'CFC'),
-('Departamento de Engenharia Elétrica', 'Carlos Oliveira', 'CREA'),
-('Departamento de Letras', 'Ana Santos', 'CRP'),
-('Departamento de Administração', 'Pedro Costa', 'CGA');
-
+-- DQL
 -- Dado o RA ou o Nome do Aluno, buscar no BD todos os demais dados do aluno.
-SELECT Alunos.*, Contato.*, Endereco.* FROM Alunos
-JOIN Contato ON Alunos.idContato = Contato.idContato
-JOIN Endereco ON Alunos.idEndereco = Endereco.idEndereco
-WHERE Alunos.ra = '1' OR Alunos.nome = 'João Silva';
+SELECT alunos.* FROM alunos
+INNER JOIN matriculas ON alunos.cpf = matriculas.cpf
+WHERE matriculas.ra = '1' OR alunos.nome = 'João da Silva';
 
 -- Dado o nome de um departamento, exibir o nome de todos os cursos associados a ele.
-SELECT nomeCurso FROM Curso
-WHERE departamento = 'Departamento de Ciências da Computação';
+SELECT cursos.nome FROM cursos 
+INNER JOIN departamentos ON cursos.iddpto = departamentos.iddpto 
+WHERE departamentos.nome = 'Departamento de Engenharia';
 
 -- Dado o nome de uma disciplina, exibir a qual ou quais cursos ela pertence.
-SELECT nomeCurso FROM DisciplinaCurso
-WHERE idDisciplina = (
-    SELECT idDisciplina FROM Disciplina
-    WHERE nomeDisciplina = 'Introdução à Programação'
-);
+SELECT cursos.nome FROM cursos 
+INNER JOIN cursodisciplina ON cursos.idcursos = cursodisciplina.idcurso 
+INNER JOIN disciplina ON cursodisciplina.iddisciplina = disciplina.iddisciplina 
+WHERE disciplina.nome = 'Matemática';
 
--- Dado o CPF de um aluno, exibir quais disciplinas ele está cursando.
-SELECT nomeDisciplina FROM Disciplina
-JOIN AlunoDisciplina ON Disciplina.idDisciplina = AlunoDisciplina.idDisciplina
-WHERE cpf = '123.456.789-00';
+--Dado o CPF de um aluno, exibir quais disciplinas ele está cursando.
+SELECT disciplina.nome FROM disciplina 
+INNER JOIN matriculadisciplina ON disciplina.iddisciplina = matriculadisciplina.iddisciplina 
+INNER JOIN matriculas ON matriculadisciplina.ra = matriculas.ra 
+WHERE matriculas.cpf = '123.456.789-10';
 
--- Filtrar todos os alunos matriculados em um determinado curso.
-SELECT * FROM Alunos
-WHERE ra IN (
-    SELECT ra FROM Curso
-    JOIN DisciplinaCurso ON Curso.nomeCurso = DisciplinaCurso.nomeCurso
-    JOIN AlunoDisciplina ON DisciplinaCurso.idDisciplina = AlunoDisciplina.idDisciplina
-    WHERE Curso.nomeCurso = 'Ciência da Computação'
-);
+--Filtrar todos os alunos matriculados em um determinado curso.
+SELECT alunos.* FROM alunos 
+INNER JOIN matriculas ON alunos.cpf = matriculas.cpf 
+WHERE matriculas.idcurso = '1';
 
--- Filtrar todos os alunos matriculados em determinada disciplina.
-SELECT * FROM Alunos
-WHERE ra IN (
-    SELECT ra
-    FROM AlunoDisciplina
-    JOIN Disciplina ON AlunoDisciplina.idDisciplina = Disciplina.idDisciplina
-    WHERE nomeDisciplina = 'Introdução à Programação'
-);
+--Filtrar todos os alunos matriculados em determinada disciplina.
+SELECT alunos.* FROM alunos 
+INNER JOIN matriculas ON alunos.cpf = matriculas.cpf 
+INNER JOIN matriculadisciplina ON matriculas.ra = matriculadisciplina.ra 
+INNER JOIN disciplina ON matriculadisciplina.iddisciplina = disciplina.iddisciplina 
+WHERE disciplina.nome = 'Programação I';
 
--- Filtrar alunos formados.
-SELECT * FROM Alunos
-WHERE ativo = FALSE;
+--Filtrar alunos formados.
+SELECT * FROM matriculas WHERE status = 'false';
 
--- Filtrar alunos ativos.
-SELECT * FROM Alunos
-WHERE ativo = TRUE;
+--Filtrar alunos ativos.
+SELECT * FROM matriculas WHERE status = 'true';
 
--- Apresentar a quantidade de alunos ativos por curso.
-SELECT Curso.nomeCurso, COUNT(*) AS quantidade_alunos_ativos FROM Alunos
-JOIN Curso ON Alunos.ra IN (
-    SELECT ra FROM Curso
-    JOIN DisciplinaCurso ON Curso.nomeCurso = DisciplinaCurso.nomeCurso
-    JOIN AlunoDisciplina ON DisciplinaCurso.idDisciplina = AlunoDisciplina.idDisciplina
-)
-WHERE ativo = TRUE
-GROUP BY Curso.nomeCurso;
+--Apresentar a quantidade de alunos ativos por curso.
+SELECT cursos.nome, COUNT(*) AS quantidade_alunos_ativos FROM cursos 
+INNER JOIN matriculas ON cursos.idcursos = matriculas.idcurso 
+INNER JOIN alunos ON matriculas.cpf = alunos.cpf 
+WHERE matriculas.status = 'true' 
+GROUP BY cursos.nome;
 
--- Apresentar a quantidade de alunos ativos por disciplina.
-SELECT Disciplina.nomeDisciplina, COUNT(*) AS quantidade_alunos_ativos FROM Alunos
-JOIN AlunoDisciplina ON Alunos.cpf = AlunoDisciplina.cpf
-JOIN Disciplina ON AlunoDisciplina.idDisciplina = Disciplina.idDisciplina
-WHERE ativo = TRUE
-GROUP BY Disciplina.nomeDisciplina;
+--Apresentar a quantidade de alunos ativos por disciplina.
+SELECT disciplina.nome, COUNT(*) AS quantidade_alunos_ativos 
+FROM disciplina 
+INNER JOIN matriculadisciplina ON disciplina.iddisciplina = matriculadisciplina.iddisciplina 
+INNER JOIN matriculas ON matriculadisciplina.ra = matriculas.ra 
+WHERE matriculas.status = 'true' 
+GROUP BY disciplina.nome;
