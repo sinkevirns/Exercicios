@@ -127,9 +127,10 @@ VALUES
 
 -- DQL
 -- Dado o RA ou o Nome do Aluno, buscar no BD todos os demais dados do aluno.
-SELECT alunos.* FROM alunos
-INNER JOIN matriculas ON alunos.cpf = matriculas.cpf
-WHERE matriculas.ra = '1' OR alunos.nome = 'João da Silva';
+SELECT * FROM ((matriculas INNER JOIN alunos USING(cpf))
+INNER JOIN telefones USING(cpf))
+INNER JOIN emails USING(cpf)
+WHERE ra = '1' OR nome = 'João Silva'
 
 -- Dado o nome de um departamento, exibir o nome de todos os cursos associados a ele.
 SELECT cursos.nome FROM cursos 
