@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Main {
+public class Recursividade {
     public static void main(String[] args) {
         System.out.println("Soma = "+somar(receber()));
         System.out.println("!= "+fatorial(receber()));
