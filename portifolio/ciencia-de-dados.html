@@ -27,13 +27,9 @@
               <p>O Google Colab é uma plataforma gratuita que permite que os notebooks Jupyter sejam executados na nuvem. A análise de dados, aprendizado automático e desenvolvimento de modelos de inteligência artificial são atividades em que ela é amplamente utilizada. Colab vem pré-configurado com bibliotecas populares como NumPy, Pandas e TensorFlow, entre outras, e suporte a Python. Além de permitir que vários usuários trabalhem simultaneamente no mesmo notebook, a plataforma permite a integração com o Google Drive para armazenamento e compartilhamento de arquivos e facilita a colaboração. Além disso, o Colab oferece recursos de GPU para acelerar os cálculos computacionais complexos.</p>
             </div>
             
-            <li>Consulta e Coleta de Dados: Importação e análise de dados, exemplificada com a tabela de dados do Titanic.</li>
-            <textarea id="code">
-df = pd.read_excel('https://github.com/PinkWink/ML_tutorial/raw/master/dataset/titanic.xls')
-df
-            </textarea>
-            <img src="./img/titanic.png" class="img">
-            <li>Bibliotecas: Pandas, NumPy e Matplotlib</li>
+            <h3>Amostragem:</h3>
+
+            <p>Instalação de bibliotecas</p>
             <textarea id="code">
 # Importando as bibliotecas
 
@@ -41,6 +37,15 @@ import pandas as pd             # Dataframes (Tabelas)
 import numpy as np              # Funções matemáticas
 import matplotlib.pyplot as plt # Plotar gráficos
             </textarea>
+
+            <p>Importando os dados (Dataframe)</p>
+            <textarea id="code">
+df = pd.read_excel('https://github.com/PinkWink/ML_tutorial/raw/master/dataset/titanic.xls')
+df
+            </textarea>
+
+            <img src="./img/titanic.png" class="img">
+            
             <li>Amostragem: Técnicas de seleção de subconjuntos de dados para análise.</li>
             <h3>Amostra Aleatória</h3>
             <textarea id="code">
