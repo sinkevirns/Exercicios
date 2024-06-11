@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tecnologia Industrial</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Automação Industrial</h1>
+        <nav>
+            <a href="index.html">Voltar para a Página Principal</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Resumo da Matéria</h2>
+
+            <h3>Introdução</h3>
+            <p>A disciplina de automação industrial discute como aplicar e integrar tecnologias para automatizar processos industriais, com ênfase no uso de microcontroladores como Arduino e ESP32. Aprendemos a programar esses dispositivos em C++ e a desenvolver e testar projetos usando softwares de simulação como Tinkercad e Wokwi durante o curso.</p>
+            
+            <h3>Arduino</h3>
+            <div class="container">
+                <img src="./img/arduino.png" alt="" class="img">
+                <p>O Arduino é uma plataforma de prototipagem eletrônica de código aberto baseada em hardware e software fáceis de usar. Os microcontroladores Arduino, como o Uno e o Mega, são amplamente utilizados para desenvolvimento de projetos de automação devido à sua simplicidade e flexibilidade. Eles são programados em C++ através do Arduino IDE, oferecendo uma vasta gama de bibliotecas e exemplos que facilitam a criação de projetos eletrônicos e robóticos. A popularidade do Arduino se deve à sua acessibilidade para iniciantes e à sua capacidade de ser integrado em projetos complexos por profissionais, tornando-o uma ferramenta essencial no ensino e na aplicação de automação industrial.</p>
+            </div>    
+                
+            <h3>ESP32</h3>
+            <div class="containerl">
+                <p>O ESP32 é um microcontrolador que possui recursos avançados de processamento e conectividade. O ESP32, desenvolvido pela Espressif Systems, possui suporte Wi-Fi e Bluetooth, tornando-o ideal para aplicações de Internet das Coisas (IoT). Além de suportar a programação em C++ através do IDE Arduino, o ESP32 possui maior capacidade de processamento e está integrado com uma variedade de periféricos, incluindo interfaces de comunicação, módulos de segurança, ADCs e DACs. As características do ESP32 o tornam uma escolha confiável e adaptável para projetos de automação industrial que requerem alto desempenho e conectividade.</p>
+                <img src="./img/esp32.png" alt="" class="img">
+            </div>
+
+            <h3>Tinkercad</h3>
+            <div class="container">
+                <a href="https://www.tinkercad.com" target="_blank">
+                    <img src="./img/tinkercad.png" alt="" class="img">
+                </a>
+                <p>O Tinkercad, desenvolvido pela Autodesk, é uma plataforma de design e simulação online que é amplamente utilizada para ensinar e prototipar circuitos e projetos 3D. O Tinkercad, com sua interface fácil de usar, permite a criação e teste de circuitos com microcontroladores como Arduino no contexto da automação industrial. O Tinkercad facilita a compreensão de conceitos básicos e avançados de programação e eletrônica sem a necessidade de hardware físico; além disso, permite a programação em C++.</p>
+            </div>    
+                
+            <h3>Wokwi</h3>
+            <div class="containerl">
+                <p>O Wokwi é uma plataforma de simulação focada em microcontroladores como Arduino e ESP32, oferecendo aos desenvolvedores uma experiência sólida e abrangente. O Wokwi não apenas suporta a programação em C++, mas também permite a simulação precisa de vários periféricos e sensores. Isso o diferencia de outras ferramentas. A interface Wokwi permite testes e verificação de projetos complexos e é uma ferramenta poderosa para aprendizado e desenvolvimento na área de automação industrial porque é projetada para replicar fielmente o ambiente de desenvolvimento de hardware.</p>
+                <a href="https://wokwi.com" target="_blank">
+                    <img src="./img/wokwi.png" alt="" class="img">
+                </a>
+            </div>
+            
+                <h3>Simulação ESP32 no Wokwi</h3>
+                <video width="740" height="460" controls class="img">
+                    <source src="video.mp4" type="video/mp4">
+                    Seu navegador não suporta a reprodução de vídeos em HTML5.
+                </video>
+                <p>Neste projeto desenvolvido no software Wokwi, utilizamos um ESP32 conectado a um display LCD para criar um menu interativo, controlado por quatro botões coloridos. Cada botão possui uma função específica:</p>
+                <li>Vermelho: Cancela a ação.</li>
+                <li>Verde: Confirma a ação.</li>
+                <li>Amarelo: Volta uma opção no menu.</li>
+                <li>Azul: Avança uma opção no menu.</li>
+                <h3>Funcionalidades do Menu:</h3>
+                <h4>Contador:</h4>
+                <li>O botão azul inicia o incremento do contador exibido no LCD.</li>
+                <li>O botão amarelo reseta o contador a zero.</li>
+                <h4>Relógio:</h4>
+                <li>Exibe a hora atual simulada no display LCD.</li>
+                <h4>Zerar Todos os Dados:</h4>
+                <li>O botão verde reseta tanto o contador quanto o relógio.</li>
+                <h3>Funcionamento:</h3>
+                <h4>Navegação pelo Menu:</h4>
+                <li>O botão azul avança pelas opções do menu.</li>
+                <li>O botão amarelo retorna à opção anterior.</li>
+                <li>O botão verde confirma a seleção e executa a ação correspondente.</li>
+                <li>O botão vermelho cancela a ação em andamento e retorna ao menu principal.</li>
+                <p>Este projeto demonstra como criar uma interface de usuário funcional utilizando o ESP32, um display LCD e botões, permitindo a navegação e execução de diferentes funções através de um menu interativo.</p>
+
+                <h3>Programação em C++</h3>
+                <p>Logo abaixo o código deste projeto, com todas as suas linhas comentadas explicando seu funcionamento:</p>
+                <textarea id="code">
+// Inclui a biblioteca LiquidCrystal_I2C para controle do display LCD via I2C
+#include <LiquidCrystal_I2C.h>
+
+// Define o objeto LCD com endereço I2C 0x27, e dimensões de 16 colunas por 2 linhas
+LiquidCrystal_I2C LCD = LiquidCrystal_I2C(0x27, 16, 2);
+
+// Define os pinos para os botões
+#define botaoAmarelo 32  
+#define botaoAzul 33
+#define botaoVerde 34
+#define botaoVermelho 35  
+
+// Variáveis globais
+int contador = 0;// Contador usado no menu "Contar ao Clicar"
+bool relogioAlterado = false;      // Indicador se a velocidade do relógio foi alterada
+int tempoRelogio = 1000;           // Intervalo de tempo do relógio em milissegundos
+int horas = 0;   // Horas do relógio
+int minutos = 0; // Minutos do relógio
+int segundos = 0;// Segundos do relógio
+
+// Função setup(), chamada uma vez ao iniciar
+void setup(){
+    Serial.begin(115200);          // Inicializa a comunicação serial a 115200 bps
+    pinMode(botaoAmarelo, INPUT);  // Configura o pino do botão amarelo como entrada
+    pinMode(botaoAzul, INPUT);     // Configura o pino do botão azul como entrada
+    pinMode(botaoVerde, INPUT);    // Configura o pino do botão verde como entrada
+    pinMode(botaoVermelho, INPUT); // Configura o pino do botão vermelho como entrada
+    LCD.backlight();               // Liga a luz de fundo do LCD
+    LCD.init();  // Inicializa o LCD
+    LCD.setCursor(0, 0);           // Move o cursor para a posição (0, 0)
+    LCD.print("Bem-vindo!");       // Exibe a mensagem "Bem-vindo!" no LCD
+    delay(2000); // Aguarda 2 segundos
+    menu();      // Chama a função menu() para exibir o menu inicial
+}
+
+// Função loop(), chamada repetidamente após setup()
+void loop(){
+    int botao = lerBotao();        // Lê o botão pressionado
+    if (botao == botaoAzul) {      // Se o botão azul foi pressionado
+        avancar();                 // Chama a função avancar()
+    } else if (botao == botaoAmarelo) { // Se o botão amarelo foi pressionado
+        voltar();// Chama a função voltar()
+    } else if (botao == botaoVerde) {   // Se o botão verde foi pressionado
+        confirmar();               // Chama a função confirmar()
+    } else if (botao == botaoVermelho) { // Se o botão vermelho foi pressionado
+        cancelar();                // Chama a função cancelar()
+    }
+}
+
+// Função que exibe o menu inicial
+void menu() {
+    LCD.clear();  // Limpa o LCD
+    LCD.setCursor(0, 0);            // Move o cursor para a posição (0, 0)
+    LCD.print("Menu:");             // Exibe a mensagem "Menu:" no LCD
+    LCD.setCursor(0, 1);            // Move o cursor para a posição (0, 1)
+    LCD.print("1. Contar       ");  // Exibe a opção "1. Contar"
+    delay(1000);  // Aguarda 1 segundo
+    LCD.setCursor(0, 1);            // Move o cursor para a posição (0, 1)
+    LCD.print("2. Relogio      ");  // Exibe a opção "2. Relogio"
+    delay(1000);  // Aguarda 1 segundo
+    LCD.setCursor(0, 1);            // Move o cursor para a posição (0, 1)
+    LCD.print("3. Zerar        ");  // Exibe a opção "3. Zerar"
+    delay(1000);  // Aguarda 1 segundo
+    LCD.setCursor(0, 1);            // Move o cursor para a posição (0, 1)
+    LCD.print("Selecione:");        // Exibe a mensagem "Selecione:"
+    while (true) {// Loop infinito para aguardar seleção de opção
+        int botao = lerBotao();     // Lê o botão pressionado
+        if (botao == botaoAzul) {   // Se o botão azul foi pressionado
+            avancar();              // Chama a função avancar()
+            break;// Sai do loop
+        } else if (botao == botaoAmarelo) { // Se o botão amarelo foi pressionado
+            voltar();               // Chama a função voltar()
+            break;// Sai do loop
+        } else if (botao == botaoVerde) { // Se o botão verde foi pressionado
+            confirmar();            // Chama a função confirmar()
+            break;// Sai do loop
+        } else if (botao == botaoVermelho) { // Se o botão vermelho foi pressionado
+            cancelar();             // Chama a função cancelar()
+            break;// Sai do loop
+        }
+    }
+}
+
+// Função que avança no menu
+void avancar() {
+    int opcao = lerOpcao();         // Lê a opção selecionada no menu
+    if (opcao == 1) {               // Se a opção 1 foi selecionada
+        contarAoClicar();           // Chama a função contarAoClicar()
+    } else if (opcao == 2) {        // Se a opção 2 foi selecionada
+        relogio();// Chama a função relogio()
+    } else if (opcao == 3) {        // Se a opção 3 foi selecionada
+        zerarDados();               // Chama a função zerarDados()
+    }
+}
+
+// Função que volta para o menu inicial
+void voltar() {
+    menu();       // Chama a função menu() para exibir o menu inicial
+}
+
+// Função confirmar (vazia, mas pode ser implementada no futuro)
+void confirmar() {
+}
+
+// Função cancelar que volta para o menu inicial
+void cancelar() {
+    menu();       // Chama a função menu() para exibir o menu inicial
+}
+
+// Função que lê qual botão foi pressionado
+int lerBotao() {
+    if (digitalRead(botaoAmarelo) == HIGH) { // Se o botão amarelo foi pressionado
+        delay(200);               // Aguarda 200 ms para debouncing
+        return botaoAmarelo;      // Retorna o identificador do botão amarelo
+    } else if (digitalRead(botaoAzul) == HIGH) { // Se o botão azul foi pressionado
+        delay(200);               // Aguarda 200 ms para debouncing
+        return botaoAzul;         // Retorna o identificador do botão azul
+    } else if (digitalRead(botaoVerde) == HIGH) { // Se o botão verde foi pressionado
+        return botaoVerde;        // Retorna o identificador do botão verde
+    } else if (digitalRead(botaoVermelho) == HIGH) { // Se o botão vermelho foi pressionado
+        return botaoVermelho;     // Retorna o identificador do botão vermelho
+    }
+    return -1;  // Retorna -1 se nenhum botão foi pressionado
+}
+
+// Função que lê a opção selecionada no menu
+int lerOpcao() {
+    int opcao = 1;                // Inicializa a opção com 1
+    while (true) {                // Loop infinito para seleção da opção
+        LCD.setCursor(0, 1);      // Move o cursor para a posição (0, 1)
+        if (opcao == 1) {         // Se a opção é 1
+            LCD.print("1. Contar");
+        } else if (opcao == 2) {  // Se a opção é 2
+            LCD.print("2. Relogio");
+        } else if (opcao == 3) {  // Se a opção é 3
+            LCD.print("3. Zerar  ");
+        }
+        int botao = lerBotao();   // Lê o botão pressionado
+        if (botao == botaoAzul) { // Se o botão azul foi pressionado
+            opcao++;              // Incrementa a opção
+            if (opcao > 3) {      // Se a opção exceder 3, volta para 1
+                opcao = 1;
+            }
+        } else if (botao == botaoAmarelo) { // Se o botão amarelo foi pressionado
+            opcao--;              // Decrementa a opção
+            if (opcao < 1) {      // Se a opção for menor que 1, volta para 3
+                opcao = 3;
+            }
+        } else if (botao == botaoVerde) { // Se o botão verde foi pressionado
+            return opcao;         // Retorna a opção selecionada
+        } else if (botao == botaoVermelho) { // Se o botão vermelho foi pressionado
+            return -1;            // Retorna -1 para indicar cancelamento
+        }
+    }
+}
+
+// Função que implementa a funcionalidade "Contar ao Clicar"
+void contarAoClicar() {
+    LCD.clear();  // Limpa o LCD
+    LCD.setCursor(0, 0);            // Move o cursor para a posição (0, 0)
+    LCD.print("Contar ao Clicar:");// Exibe a mensagem "Contar ao Clicar:"
+    LCD.setCursor(0, 1);            // Move o cursor para a posição (0, 1)
+    LCD.print("Valor: ");           // Exibe a mensagem "Valor: "
+    LCD.print(contador);            // Exibe o valor do contador
+    while (true) {// Loop infinito para contar ao clicar
+        int botao = lerBotao();     // Lê o botão pressionado
+        if (botao == botaoAzul) {   // Se o botão azul foi pressionado
+            contador++;             // Incrementa o contador
+            LCD.setCursor(0, 1);    // Move o cursor para a posição (0, 1)
+            LCD.print("          "); // Limpa a linha do contador
+            LCD.setCursor(0, 1);    // Move o cursor para a posição (0, 1)
+            LCD.print("Valor: ");   // Exibe a mensagem "Valor: "
+            LCD.print(contador);    // Exibe o valor atualizado do contador
+        } else if (botao == botaoAmarelo) { // Se o botão amarelo foi pressionado
+            contador = 0;           // Zera o contador
+            LCD.setCursor(0, 1);    // Move o cursor para a posição (0, 1)
+            LCD.print("          "); // Limpa a linha do contador
+            LCD.setCursor(0, 1);    // Move o cursor para a posição (0, 1)
+            LCD.print("Valor: ");   // Exibe a mensagem "Valor: "
+            LCD.print(contador);    // Exibe o valor atualizado do contador
+        } else if (botao == botaoVermelho) { // Se o botão vermelho foi pressionado
+            menu();                 // Volta para o menu inicial
+            break;// Sai do loop
+        }
+    }
+}
+
+// Função que implementa a funcionalidade do relógio
+void relogio() {
+    LCD.clear();  // Limpa o LCD
+    LCD.setCursor(0, 0);            // Move o cursor para a posição (0, 0)
+    LCD.print("Relogio:");          // Exibe a mensagem "Relogio:"
+    while (true) {// Loop infinito para atualizar o relógio
+        LCD.setCursor(0, 1);        // Move o cursor para a posição (0, 1)
+        LCD.print(horas);           // Exibe as horas
+        LCD.print(":");             // Exibe o separador ":"
+        LCD.print(minutos);         // Exibe os minutos
+        LCD.print(":");             // Exibe o separador ":"
+        LCD.print(segundos);        // Exibe os segundos
+        delay(tempoRelogio);        // Aguarda o tempo do relógio (1 segundo por padrão)
+        segundos++;                 // Incrementa os segundos
+        if (segundos == 60) {       // Se os segundos alcançam 60
+            segundos = 0;           // Zera os segundos
+            minutos++;              // Incrementa os minutos
+            LCD.setCursor(0, 1);    // Move o cursor para a posição (0, 1)
+            LCD.print("          "); // Limpa a linha do relógio
+        }
+        if (minutos == 60) {        // Se os minutos alcançam 60
+            minutos = 0;            // Zera os minutos
+            horas++;                // Incrementa as horas
+            LCD.setCursor(0, 1);    // Move o cursor para a posição (0, 1)
+            LCD.print("          "); // Limpa a linha do relógio
+        }
+        if (horas == 24) {          // Se as horas alcançam 24
+            horas = 0;              // Zera as horas
+        }
+        int botao = lerBotao();     // Lê o botão pressionado
+        if (botao == botaoAzul) {   // Se o botão azul foi pressionado
+            if (relogioAlterado) {  // Se o relógio foi alterado
+                tempoRelogio = 1000; // Reseta o tempo do relógio para 1 segundo
+            } else {
+                tempoRelogio = 250; // Acelera o tempo do relógio para 250 ms
+            }
+            relogioAlterado = !relogioAlterado; // Inverte o estado do relógio alterado
+        } else if (botao == botaoAmarelo) { // Se o botão amarelo foi pressionado
+            tempoRelogio = 1000;     // Reseta o tempo do relógio para 1 segundo
+            relogioAlterado = false; // Reseta o estado do relógio alterado
+        } else if (botao == botaoVermelho) { // Se o botão vermelho foi pressionado
+            menu();// Volta para o menu inicial
+            break; // Sai do loop
+        }
+    }
+}
+
+// Função que zera todos os dados (contador e relógio)
+void zerarDados() {
+    LCD.clear();  // Limpa o LCD
+    LCD.setCursor(0, 0);            // Move o cursor para a posição (0, 0)
+    LCD.print("Deseja zerar todos"); // Exibe a mensagem "Deseja zerar todos"
+    LCD.setCursor(0, 1);            // Move o cursor para a posição (0, 1)
+    LCD.print("os dados?");         // Exibe a mensagem "os dados?"
+    int tempoPressionado = 0;       // Inicializa o tempo que o botão verde foi pressionado
+    bool botaoVerdePressionado = false; // Inicializa o estado do botão verde pressionado
+    while (true) {// Loop infinito para aguardar confirmação
+        int botao = lerBotao();     // Lê o botão pressionado
+        if (botao == botaoVerde) {  // Se o botão verde foi pressionado
+            botaoVerdePressionado = true; // Marca que o botão verde foi pressionado
+            tempoPressionado = millis(); // Registra o tempo que o botão verde foi pressionado
+        } else if (botao == botaoVermelho) { // Se o botão vermelho foi pressionado
+            break;// Sai do loop
+        }
+        if (botaoVerdePressionado && millis() - tempoPressionado > 3000) { // Se o botão verde foi pressionado por mais de 3 segundos
+            contador = 0;           // Zera o contador
+            horas = 0;              // Zera as horas
+            minutos = 0;            // Zera os minutos
+            segundos = 0;           // Zera os segundos
+            break;// Sai do loop
+        }
+    }
+    menu();       // Volta para o menu inicial
+}
+                </textarea>
+        </section>
+    </main>
+    <footer>
+        <p>Confira meu <a href="https://github.com/sinkevirns/Exercicios/tree/master/automacaoIndustrial" style="color: white;" target="_blank">GitHub</a> de Automação Industrial.</p>
+    </footer>
+</body>
+</html>

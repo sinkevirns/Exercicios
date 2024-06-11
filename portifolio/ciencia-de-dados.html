@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ciência de Dados</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Ciência de Dados</h1>
+        <nav>
+            <a href="index.html">Voltar para a Página Principal</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Resumo da Matéria</h2>
+            <h3>Introdução</h3>
+            <p>A Ciência de Dados extrai conhecimento de dados brutos para auxiliar na tomada de decisões. Através de ferramentas como o Google Colab e bibliotecas como Pandas, NumPy e Matplotlib, podemos analisar dados, identificar padrões e tomar decisões mais inteligentes. Conceitos como amostragem, tendências centrais e medidas de dispersão são essenciais para essa análise. A Ciência de Dados tem diversas aplicações, como a análise de mercado.</p>
+            <li>Google Colab: Plataforma utilizada para desenvolver e executar código Python em um ambiente de notebook.</li>
+            <a href="https://colab.google/" target="_blank">
+                <img src="./img/colab.png" class="img">
+            </a>
+            <li>Consulta e Coleta de Dados: Importação e análise de dados, exemplificada com a tabela de dados do Titanic.</li>
+            <textarea id="code">
+df = pd.read_excel('https://github.com/PinkWink/ML_tutorial/raw/master/dataset/titanic.xls')
+df
+            </textarea>
+            <img src="./img/titanic.png" class="img">
+            <li>Bibliotecas: Pandas, NumPy e Matplotlib</li>
+            <textarea id="code">
+# Importando as bibliotecas
+
+import pandas as pd             # Dataframes (Tabelas)
+import numpy as np              # Funções matemáticas
+import matplotlib.pyplot as plt # Plotar gráficos
+            </textarea>
+            <li>Amostragem: Técnicas de seleção de subconjuntos de dados para análise.</li>
+            <h3>Amostra Aleatória</h3>
+            <textarea id="code">
+#df.iloc[1,2] #selecionar uma celula do df (linha e coluna)
+#df.iloc[1:5,2:4] # selecionando intervalos
+
+#np.random.randint(0,100,2) #np.random.randint(init,final,size) número aleatório dentro de um intervalo
+
+#Colete uma amostra aleatoria de 10 linhas do df titanic
+'''
+#opção 1
+number = [np.random.randint(0,1309,10),:]
+amostra = df.iloc[numbers]
+amostra
+
+#opção 2
+amostra 2 = df.iloc[np.random.randint(0,1309,10),:]
+
+
+# faz a mesma coisa que o outro código, porém sem repetições
+#opção 3
+amostra3 = df.sample(10) #amostra = df.sample(10, replace = True) -> permite repetição
+
+#opção 4
+amostra4 = df.iloc[10:50].sample(10) #amostra entre um intervalo
+'''
+            </textarea>
+            <h3>Amostra Sistemática</h3>
+            <textarea id="code">
+# função numpy arange -> gera um array a partir de um intervalo
+# assinatura da função: np.arange(init,final,step)
+#array = np.arange(0,101,2)
+#array
+
+# Exercício: obtenha uma amostra sistemática do df de tamanho 10 e passo 31
+size = 10
+step = 31
+firstLine = np.random.randint(0,1309-size*step, 1)
+firstLine
+lines = np.arange(firstLine, 1309, step)[:10]
+lines
+#amostraSistematica = df.iloc[np.random.randint(0,1309 - size * step,1)]
+            </textarea>
+            <h3>Amostra Estrátificada</h3>
+            <textarea id="code">
+#all_male = df.loc[df['sex']=='male']
+#sample_male = all_male.sample(8)
+#sample_male
+
+#all_female = df.loc[df['sex']=='female']
+#sample_female = all_female.sample(5)
+#sample_female
+#sample_female.shape #números de linhas e colunas
+
+all_male = df.loc[df['sex']=='male']
+sample_male = all_male.sample(round(all_male.shape[0]*0.01)) #amostra de 1% / round arredonda o número/ shape informa as linhas e as colunas
+sample_male
+
+all_female = df.loc[df['sex']=='female']
+sample_female = all_female.sample(round(all_female.shape[0]*0.01)) #amostra de 1% / round arredonda o número
+sample_female
+            </textarea>
+            <li>Tendências Centrais: Cálculo e interpretação de médias, medianas e modas.</li>
+            <h3>Modal</h3>
+            <textarea id="code">
+modal = pd.DataFrame([35, 37, 36, 34, 38, 35, 37, 37, 33, 36, 38, 37,35, 37, 34, 33, 37, 36, 35, 38, 36, 35, 36, 37, 38, 39, 37, 37, 36, 37, 33, 37, 35, 37, 39])
+modal.mode()
+            </textarea>
+            <h3>Bimodal</h3>
+            <textarea id="code">
+bimodal = pd.DataFrame([1, 0, 2, 3, 1, 4, 5, 1, 0, 3, 0, 7, 8, 9, 0, 1])
+bimodal.mode()
+            </textarea>
+            <h3>Polimodal</h3>
+            <textarea id="code">
+polimodal = pd.DataFrame([1, 0, 2, 3, 1, 4, 5, 1, 0, 3, 3, 3, 0, 7, 8, 9, 0, 1])
+polimodal.mode()  
+            </textarea>
+            <h3>Amodal</h3>
+            <textarea id="code">
+amodal = pd.DataFrame([1,2,3,4,5,6,7,8,9])
+amodal.mode().shape[0]
+if amodal.mode().shape[0] == amodal.shape[0]:
+  print("amodal")
+elif amodal.mode().shape[0] == 1:
+  print('bimodal')
+elif amodal.mode().shape[0] == 2:
+  print('bimodal')
+else:
+  print("polimodal")
+
+##Moda da tabela do titanic df[['pclass','survived','sex','age']].mode()
+df.mode()
+            </textarea>
+            <li>Medidas de Dispersão: Análise da variabilidade dos dados, incluindo desvio padrão e variância.</li>
+            <p>Durante o semestre, aprendemos a coletar, manipular e visualizar dados utilizando Python e bibliotecas especializadas. Aplicamos conceitos estatísticos, como amostragem, tendências centrais e medidas de dispersão, no contexto do dataset do Titanic.</p>
+        </section>
+    </main>
+    <footer>
+        <p>Confira meu <a href="https://colab.research.google.com/drive/1tvsLy3bSAcmwzhqZGCrfEtl5i0VEvzqm?usp=sharing" style="color: white;" target="_blank">Colab</a>.</p>
+    </footer>
+</body>
+</html>

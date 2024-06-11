@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desenvolvimento Web</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Desenvolvimento Web</h1>
+        <nav>
+            <a href="index.html">Voltar para a Página Principal</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Resumo da Matéria</h2>
+            <h3>Introdução</h3>
+            <p>O desenvolvimento web envolve a criação de sites e aplicações utilizando HTML, CSS e JavaScript. HTML estrutura o conteúdo, enquanto HTML semântico melhora a acessibilidade e SEO com tags específicas como header e footer. CSS estiliza e define o layout, tornando as páginas atraentes e responsivas. JavaScript adiciona interatividade e dinamismo, permitindo funcionalidades avançadas e atualizações de conteúdo sem recarregar a página. A árvore DOM representa a estrutura de um documento HTML, permitindo a manipulação dinâmica dos elementos via JavaScript.</p>
+            
+            <h3>VSCode</h3>
+            <div class="container">
+                <a href="https://code.visualstudio.com" target="_blank">
+                    <img src="./img/vscode.png" alt="" class="img">
+                </a> 
+                <p>O VSCode é um editor de código-fonte poderoso da Microsoft que é conhecido por sua facilidade de uso, extensão e suporte a uma variedade de linguagens de programação. Além de uma ampla biblioteca de extensões que permitem personalizar e ampliar suas funcionalidades de acordo com as necessidades do desenvolvedor, ele oferece recursos avançados para edição, depuração e controle de versão.</p>
+            </div>
+            
+            <h3>HTML (Hypertext Markup Language)</h3>
+            <div class="containerl">
+                <p>A linguagem padrão para a criação e formatação de documentos para a web é o HTML. Agrupa componentes como texto, imagens, links e formulários em uma página da web. O HTML usa tags para definir a estrutura e o significado do conteúdo.</p>
+                <img src="./img/html.png" alt="" class="img">
+            </div>
+
+            <textarea id="code">
+<!DOCTYPE html>
+<html lang="en">
+<!-- Define que o documento é um HTML5 -->
+<head>
+    <!-- Define a linguagem do conteúdo como inglês -->
+    <meta charset="UTF-8">
+    <!-- Define o conjunto de caracteres utilizado no documento como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Define que a viewport (janela de visualização) deve ter a largura da tela do dispositivo e uma escala inicial de 1.0 -->
+    <title>Document</title>
+    <!-- Define o título da página que aparecerá na aba do navegador -->
+</head>
+<body>
+    <!-- Início do corpo do documento -->
+    body
+    <!-- Texto simples "body" que será exibido no corpo da página -->
+body
+<!-- Fim do corpo do documento -->
+</html>
+<!-- Fim do documento HTML -->
+            </textarea>
+            
+            <h3>CSS (Cascading Style Sheets)</h3>
+            <div class="container">
+                <img src="./img/css.png" alt="" class="img">
+                <p>CSS é uma linguagem de estilo utilizada para controlar a apresentação visual de documentos HTML. Permite definir o layout, cores, fontes e outros aspectos visuais de uma página da web. Utilizando regras de estilo, é possível criar designs responsivos e atraentes para diferentes dispositivos e tamanhos de tela.</p>
+            </div>
+
+            <textarea id="code">
+body {
+    font-family: Arial, sans-serif;
+    /* Define a família de fontes para o corpo do documento como Arial, com uma fonte secundária genérica sans-serif */
+    margin: 0;
+    /* Remove a margem padrão do corpo do documento */
+    padding: 0;
+    /* Remove o preenchimento (padding) padrão do corpo do documento */
+    line-height: 1.6;
+    /* Define a altura da linha como 1.6 vezes o tamanho da fonte, para melhor legibilidade */
+}
+
+header {
+    background: red;
+    /* Define a cor de fundo do cabeçalho como vermelho */
+    color: #fff;
+    /* Define a cor do texto dentro do cabeçalho como branca (#fff é a notação hexadecimal para branco) */
+    padding: 1rem 0;
+    /* Adiciona um preenchimento (padding) de 1rem (equivalente a 16px, dependendo do tamanho da fonte base) no eixo vertical (acima e abaixo) do cabeçalho */
+    text-align: center;
+    /* Alinha o texto no centro do cabeçalho */
+}
+
+footer {
+    background: red;
+    /* Define a cor de fundo do rodapé como vermelho */
+    color: #fff;
+    /* Define a cor do texto dentro do rodapé como branca */
+    text-align: center;
+    /* Alinha o texto no centro do rodapé */
+    bottom: 0;
+    /* Fixa a posição do rodapé na parte inferior, embora isso funcione apenas em conjunto com outras regras de posicionamento */
+    width: 100%;
+    /* Define a largura do rodapé como 100% da largura do elemento pai */
+    padding: 0.1rem 0;
+    /* Adiciona um preenchimento (padding) de 0.1rem (equivalente a 1.6px) no eixo vertical (acima e abaixo) do rodapé */
+}
+            </textarea>    
+            
+            <h3>JavaScript</h3>
+            <div class="containerl">
+                <p>JavaScript é uma linguagem de programação avançada que é amplamente usada para fazer com que as páginas da web pareçam mais interativas. Ele incorpora comportamento dinâmico às páginas HTML, permitindo a manipulação do conteúdo, a comunicação com servidores web e a resposta a eventos do usuário. Todos os principais navegadores da web suportam JavaScript, que é essencial para o desenvolvimento de aplicativos web contemporâneos.</p>
+                <img src="./img/js.png" alt="" class="img"> 
+            </div>
+            <textarea id="code">
+function loadPage(page) {
+    // Declara uma função chamada loadPage que recebe um parâmetro 'page'
+
+    fetch(page)
+        // Usa a função fetch para buscar o recurso na URL especificada em 'page'
+        .then(response => response.text())
+        // Quando a resposta for recebida, converte-a para texto
+        .then(data => {
+            // Após a conversão, executa a função com o conteúdo da resposta
+            document.getElementById('content').innerHTML = data;
+            // Insere o conteúdo (data) no elemento com id 'content' no HTML
+            document.getElementById('intro').style.display = 'none';
+            // Esconde o elemento com id 'intro' no HTML, definindo seu estilo de exibição como 'none'
+        })
+        .catch(error => console.error('Error loading page:', error));
+        // Captura qualquer erro que ocorra durante o fetch ou os then e exibe uma mensagem de erro no console
+}
+            </textarea>
+            
+            <h3>HTML Semântico</h3>
+            <div class="container">
+                <img src="./img/htmls.png" alt="" class="img">    
+                <p>O termo "HTML Semântico" refere-se à maneira como os elementos do HTML são usados de forma significativa e descritiva, dando significado semântico aos vários componentes de uma página da web. O HTML semântico usa tags como "header", "nav", "main", "section", "article" e "footer" para definir a estrutura e o significado do conteúdo, em vez de simplesmente usar divs e spans convencionais. Além de melhorar a indexação e a acessibilidade dos mecanismos de busca, isso torna o código mais acessível e fácil de manter para os desenvolvedores.</p>
+            </div>
+
+            <h3>Árvore DOM</h3>
+            <div class="containerl">
+                <p>A Árvore DOM é uma estrutura de dados hierárquica que mostra a estrutura lógica de um documento HTML ou XML. Cada elemento HTML da página é mostrado como uma árvore com elementos filhos e elementos aninhados dentro. O DOM permite que scripts como JavaScript interajam dinamicamente com o conteúdo e a estrutura da página. Isso significa que você pode alterar, criar e excluir elementos enquanto está executando. Isso é essencial para criar sites dinâmicos e interativos.</p>
+                <img src="./img/dom.png" alt="" class="img ">    
+            </div>
+
+            <h3>Calculadora simples no VSCode</h3>
+            <iframe src="./Calculadora/index.html" width="100%" height="600"></iframe>
+            <p>Neste projeto de calculadora simples desenvolvido no VSCode, integramos HTML, CSS e JavaScript para criar uma aplicação funcional. O HTML é utilizado para estruturar a interface da calculadora, o CSS para estilizá-la e o JavaScript para implementar as operações matemáticas e a interatividade.</p>
+            <h3>Funcionalidades da Calculadora:</h3>
+            <li>Interface Simples: Estruturada com botões numéricos e operadores básicos.</li>
+            <li>Operações Matemáticas: Adição, subtração, multiplicação e divisão.</li>
+            <li>Operações Continuadas: A calculadora permite operações múltiplas em sequência.</li>
+            <h3>Desenvolvimento</h3>
+            <h3>HTML</h3>
+            <textarea id="code">
+<!DOCTYPE html>
+<!-- Define que o documento é um HTML5 -->
+<html lang="en">
+<!-- Define a linguagem do documento como inglês -->
+<head>
+<!-- Início da seção de cabeçalho do documento -->
+
+<meta charset="UTF-8">
+<!-- Define o conjunto de caracteres utilizado no documento como UTF-8 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Define a largura da área de visualização para corresponder à largura do dispositivo e define a escala inicial como 1.0 -->
+<title>Calculadora</title>
+<!-- Define o título da página exibido na aba do navegador -->
+<link rel="stylesheet" href="style.css">
+<!-- Inclui o arquivo de estilo externo chamado 'style.css' para estilizar o documento -->
+<script src="./script.js"></script>
+<!-- Inclui o arquivo de script externo chamado 'script.js' -->
+
+</head>
+<!-- Fim da seção de cabeçalho do documento -->
+
+<body>
+<!-- Início do corpo do documento -->
+
+    <style>
+        body{
+            background: black;
+        }
+    </style>
+    <!-- Define um estilo embutido para o corpo do documento com um fundo preto -->
+
+<header class="header">CALCULADORA</header>
+<!-- Cabeçalho da calculadora -->
+
+<main class="margin"></main>
+<!-- Principal área de margem -->
+
+<main class="calculator">
+<!-- Principal área da calculadora -->
+
+    <input type="text" id="display" disabled>
+    <!-- Campo de entrada para exibir o resultado, desabilitado para entrada do usuário -->
+
+    <!-- Botões para operações matemáticas e números -->
+    <button onclick="clearLastCharacter()">←</button>
+    <button onclick="clearDisplay()">C</button>
+    <button onclick="addParentheses()">()</button>
+    <button onclick="addToDisplay('/')">÷</button>
+    <button onclick="addToDisplay('7')">7</button>
+    <button onclick="addToDisplay('8')">8</button>
+    <button onclick="addToDisplay('9')">9</button>
+    <button onclick="addToDisplay('*')">x</button>
+    <button onclick="addToDisplay('4')">4</button>
+    <button onclick="addToDisplay('5')">5</button>
+    <button onclick="addToDisplay('6')">6</button>
+    <button onclick="addToDisplay('-')">-</button>
+    <button onclick="addToDisplay('1')">1</button>
+    <button onclick="addToDisplay('2')">2</button>
+    <button onclick="addToDisplay('3')">3</button>
+    <button onclick="addToDisplay('+')">+</button>
+    <button onclick="toggleSign()">+/-</button>
+    <button onclick="addToDisplay('0')">0</button>
+    <button onclick="addToDisplay('.')">.</button>
+    <button style="background-color: orange;" onclick="calculate()">=</button>
+</main>
+
+<footer class="footer">Copyright &copy; 2024</footer>
+<!-- Rodapé da página exibindo o ano de copyright -->
+
+body
+<!-- Fim do corpo do documento -->
+
+</html>
+<!-- Fim do documento HTML -->
+
+            </textarea>
+            <li>Define a estrutura da calculadora com botões para números e operadores.</li>
+            <h3>CSS</h3>
+            <textarea id="code">
+/* Estilos para o cabeçalho */
+.header {
+    color: white;
+    /* Cor do texto branco */
+    font-size: xx-large;
+    /* Tamanho da fonte extra grande */
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    /* Família de fontes */
+    width: 100%;
+    /* Largura total */
+    height: 100px;
+    /* Altura de 100 pixels */
+    text-align: center;
+    /* Alinhamento do texto no centro */
+    display: flex;
+    /* Usa o modelo de layout flexível */
+    align-items: center;
+    /* Alinha os itens verticalmente ao centro */
+    justify-content: center;
+    /* Alinha os itens horizontalmente ao centro */
+}
+
+/* Estilos para a área de margem */
+.margin {
+    height: 40px;
+    /* Define a altura de 40 pixels */
+}
+
+/* Estilos para a calculadora */
+.calculator {
+    background-color: gray;
+    /* Cor de fundo cinza */
+    width: 300px;
+    /* Largura de 300 pixels */
+    margin: 0 auto;
+    /* Margem automática horizontal para centralizar */
+    border: 1px solid white;
+    /* Borda de 1 pixel sólida branca */
+    border-radius: 5px;
+    /* Raio de borda de 5 pixels */
+    padding: 10px;
+    /* Preenchimento interno de 10 pixels */
+}
+
+.calculator input {
+    font-family: fantasy;
+    /* Define a família de fontes para o campo de entrada */
+    background-color: white;
+    /* Cor de fundo branca */
+    border: 1px solid;
+    /* Borda de 1 pixel sólida */
+    border-radius: 5px;
+    /* Raio de borda de 5 pixels */
+    width: 89%;
+    /* Largura de 89% */
+    margin-bottom: 5px;
+    /* Margem inferior de 5 pixels */
+    padding: 15px;
+    /* Preenchimento interno de 15 pixels */
+    font-size: 18px;
+    /* Tamanho da fonte de 18 pixels */
+    text-align: right;
+    /* Alinhamento do texto à direita */
+}
+
+.calculator button {
+    font-family: fantasy;
+    /* Define a família de fontes para os botões */
+    border: 1px solid;
+    /* Borda de 1 pixel sólida */
+    border-radius: 5px;
+    /* Raio de borda de 5 pixels */
+    width: 24%;
+    /* Largura de 24% */
+    padding: 10px;
+    /* Preenchimento interno de 10 pixels */
+    font-size: 18px;
+    /* Tamanho da fonte de 18 pixels */
+    margin-bottom: 5px;
+    /* Margem inferior de 5 pixels */
+}
+
+/* Estilos para o rodapé */
+.footer {
+    color: white;
+    /* Cor do texto branco */
+    width: 100%;
+    /* Largura total */
+    height: 100px;
+    /* Altura de 100 pixels */
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    /* Família de fontes */
+    text-align: center;
+    /* Alinhamento do texto no centro */
+    display: flex;
+    /* Usa o modelo de layout flexível */
+    align-items: end;
+    /* Alinha os itens verticalmente na extremidade inferior */
+    justify-content: center;
+    /* Alinha os itens horizontalmente no centro */
+}
+
+            </textarea>
+            <li>Estiliza a interface da calculadora para torná-la atraente e funcional.</li>
+            <h3>JavaScript</h3>
+            <textarea id="code">
+function addToDisplay(value) {
+    // Adiciona o valor ao campo de exibição
+    document.getElementById('display').value += value;
+}
+
+function clearDisplay() {
+    // Limpa o campo de exibição, definindo seu valor como uma string vazia
+    document.getElementById('display').value = '';
+}
+
+function clearLastCharacter() {
+    // Remove o último caractere do campo de exibição
+    let displayValue = document.getElementById('display').value;
+    document.getElementById('display').value = displayValue.slice(0, -1);
+}
+
+function toggleSign() {
+    // Alterna o sinal do número no campo de exibição
+    let displayValue = document.getElementById('display').value;
+    if (displayValue.startsWith('-')) {
+        // Se o número for negativo, remove o sinal negativo
+        document.getElementById('display').value = displayValue.slice(1);
+    } else {
+        // Se o número for positivo, adiciona o sinal negativo
+        document.getElementById('display').value = '-' + displayValue;
+    }
+}
+
+function addParentheses() {
+    // Adiciona parênteses ao redor da expressão no campo de exibição
+    let displayValue = document.getElementById('display').value;
+    let lastChar = displayValue.slice(-1);
+    
+    if (!isNaN(parseInt(lastChar)) || lastChar === ')') {
+        // Se o último caractere for um número ou um parêntese fechado, adiciona um parêntese fechado
+        document.getElementById('display').value += ')';
+    } else {
+        // Caso contrário, adiciona um parêntese aberto
+        document.getElementById('display').value += '(';
+    }
+}
+
+function calculate() {
+    // Calcula a expressão matemática inserida no campo de exibição
+    let expression = document.getElementById('display').value;
+    let result;
+    try {
+        // Usa a função eval para calcular a expressão
+        result = eval(expression);
+    } catch(error) {
+        // Em caso de erro, define o resultado como 'Erro'
+        result = 'Erro';
+    }
+    // Exibe o resultado no campo de exibição
+    document.getElementById('display').value = result;
+}
+
+            </textarea>
+            <li>Implementa a lógica por trás das operações matemáticas.</li>
+            <li>Manipula os eventos de clique dos botões para atualizar a tela com os resultados.</li>
+            <p>Este projeto é um excelente exercício para desenvolvedores iniciantes que desejam praticar suas habilidades em front-end e explorar a integração de várias tecnologias web em um aplicativo prático e útil.</p>
+        </section>
+    </main>
+    <footer>
+        <p>Confira meu <a href="https://github.com/sinkevirns/Exercicios/tree/master/desenvolvimentoWeb" style="color: white;" target="_blank">GitHub</a> de Desenvolvimento Web.</p>
+    </footer>
+</body>
+</html>

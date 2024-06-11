@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linguagem de Programação</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Linguagem de Programação</h1>
+        <nav>
+            <a href="index.html">Voltar para a Página Principal</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Resumo da Matéria</h2>
+            <h3>Introdução</h3>
+                <p>O foco da disciplina de Linguagem de Programação é aprender conceitos básicos de programação usando a linguagem Java. Experimentamos variáveis para armazenar dados, estruturas de decisão (como if-else e switch) para controlar o fluxo de execução e estruturas de repetição (como for, while e do-while) para realizar tarefas iterativas. Além disso, aprendemos a trabalhar com vetores para manipular coleções de dados e definir e utilizar funções que promovem a clareza e a reutilização do código, além de modularizar e organizar o código. O desenvolvimento de soluções bem-estruturadas requer esta base Java sólida.</p>
+                
+                <h3>IntelliJ:</h3>
+                <div class="container">
+                    <a href="https://www.jetbrains.com/pt-br/idea/" target="_blank">
+                        <img src="./img/IntelliJ.png" alt="" class="img">
+                    </a>
+                    <p>O IntelliJ IDEA é um ambiente de desenvolvimento integrado (IDE) popular entre os desenvolvedores que fazem software em várias linguagens de programação, principalmente Java. O IntelliJ IDEA, desenvolvido pela JetBrains, tem funcionalidades sofisticadas como autocompletar inteligente, refatoração de código, depuração integrada, análise estática, ferramentas de teste e integração com sistemas de controle de versão como Git. Suas funcionalidades extensas e interfaces fáceis de usar aumentam a produtividade dos desenvolvedores, tornando o processo de desenvolvimento mais agradável e eficiente.</p>
+                </div>
+                
+            <h3>Variáveis:</h3>
+            <div class="containerl">
+                <p>Em Java, as variáveis são espaços de armazenamento capazes de armazenar dados modificáveis. Elas têm um nome, um tipo de dado e um valor. Entre os tipos de variáveis estão int, double, boolean e char. Em programas Java, os dados são armazenados e alterados por variáveis.</p>
+                <a href="https://cainaantunes.notion.site/Java-4267695036f542a9874f7d328bf1a154" target="_blank">
+                    <img src="./img/d.png" alt="" class="img">
+                </a>
+            </div>
+            <textarea id="code">
+int numero = 10;
+double preco = 19.99;
+char letra = 'A';
+boolean isJavaFun = false;
+String saudacao = "Olá, Mundo!";
+            </textarea>
+
+            <h3>Operadores:</h3>
+            <p>Uma variedade de operadores são suportados pelo Java para realizar operações em variáveis e valores. Os operadores que estão incluídos são os operadores aritméticos (+, -, *, /, %), os operadores de atribuição (=, +=, -=, *=, /=, %=) e os operadores de comparação (==,!Operadores lógicos (&&, ||,!), além de =, <, >, <= e >=.</p>
+            <textarea id="code">
+// Operadores aritméticos
+int soma = 10 + 5;
+double divisao = 10.0 / 3;
+int modulo = 10 % 3;
+
+// Operadores de atribuição
+int x = 5;
+x += 3; // x agora é 8
+
+// Operadores de comparação
+boolean igual = (10 == 5); // false
+boolean menorQue = (10 < 5); // false
+
+// Operadores lógicos
+boolean resultado = (true && false); // false
+            </textarea>
+
+            <h3>Conversões entre Tipos de Variáveis</h3>
+            <div class="container">
+                <a href="https://cainaantunes.notion.site/Java-4267695036f542a9874f7d328bf1a154" target="_blank">
+                    <img src="./img/conversao.png" alt="">
+                </a>
+                <p>As variáveis podem ser convertidas de um tipo para outro com casting e métodos de conversão explícita, como parseInt() e parseDouble(), estão disponíveis no Java. Em certos casos, a conversão automatica entre tipos compatíveis também é possível.</p>
+            </div>
+            <textarea id="code">
+// Conversão de String para int
+String numeroString = "10";
+int numeroInt = Integer.parseInt(numeroString);
+
+// Conversão de int para String
+int numero = 15;
+String numeroConvertido = Integer.toString(numero);
+
+// Conversão de double para int
+double valorDouble = 10.5;
+int valorInt = (int) valorDouble;
+            </textarea>
+
+            <h3>Keyboard Input Java</h3>
+            <p>Em Java, a classe Scanner ou a classe BufferedReader podem ser usadas para receber entradas do teclado. A classe BufferedReader é mais eficiente para a entrada de grandes volumes de dados, enquanto a classe Scanner é mais simples e oferece métodos para ler vários tipos de entrada. Ambos são úteis para ler entradas do teclado nos programas Java.</p>
+            <textarea id="code">
+// Scanner
+import java.util.Scanner;
+Scanner in = new Scanner(System.in);
+int myInt = in.nextInt();
+double myDouble = in.nextDouble();
+String myString = in.next();
+in.close
+
+//Exemplo:
+Scanner in = new Scanner(System.in);
+int n1;
+double n2;
+System.out.println("Digite um numero inteiro:");
+n1 = in.nextInt();
+System.out.println("Digite um numero real:");
+n2 = in.nextDouble();
+
+System.out.println("Voce digitou: " + n1 + " e " + n2);
+            </textarea>
+
+            <h3>Estruturas de decisão</h3>
+            <p>Em Java, as estruturas de decisão permitem que os programas escolham vários caminhos de execução dependendo das circunstâncias. Elas executam vários blocos de código usando testes lógicos para gerenciar o fluxo do programa. As estruturas de decisão if/else e switch são as mais utilizadas em Java.</p>
+            
+            <h4>if/else:</h4>
+            <p>Um bloco de código pode ser executado se uma condição for verdadeira e outro bloco de código pode ser executado se a condição for falsa no Java. Para testar sequencialmente várias condições, pode ser estendido adicionando else if.</p>
+            <h4>if:</h4>
+            <textarea id="code">
+int testeLogico = 2;
+
+if (testeLogico < 5){
+	/*
+	bloco de instruções
+	*/
+}
+            </textarea>
+            <a href="https://cainaantunes.notion.site/Java-4267695036f542a9874f7d328bf1a154" target="_blank">
+                <img src="./img/if.png" alt="" class="img">
+            </a>
+
+            <h4>else:</h4>
+            <textarea id="code">
+int testeLogico = 2
+
+if (testeLogico < 5){
+	/*
+	bloco de instruções 1
+	*/
+}else{
+	/*
+	bloco de instruções 2
+	*/
+}
+            </textarea>
+            <a href="https://cainaantunes.notion.site/Java-4267695036f542a9874f7d328bf1a154" target="_blank">
+                <img src="./img/else.png" alt="" class="img">
+            </a>
+
+            <h4>else if:</h4>
+            <p>Em Java, o O else if pode ser usado para testar várias condições em uma estrutura de decisão if/else. Ele permite a encadeamento sequencial de várias condições, executando blocos de código distintos para cada condição verdadeira. Um bloco opcional else pode ser executado se nenhuma das condições if ou else if for atendida. Quando há várias opções a serem consideradas, esta estrutura é útil porque oferece um controle de fluxo mais preciso.</p>
+            <textarea id="code">
+int a = 5;
+if (a > 5) {
+    System.out.println("a é maior que 5");
+} else if (a == 5) {
+    System.out.println("a é igual a 5");
+} else {
+    System.out.println("a é menor que 5");
+}
+
+            </textarea>
+
+            <h4>switch:</h4>
+            <p>Em Java, o switch é uma estrutura de decisão que permite que um bloco de código seja executado de acordo com o valor de uma expressão. Ele executa o bloco de código que corresponde ao valor da expressão após avaliar a expressão. É particularmente vantajoso em situações em que vários casos devem ser tratados de maneira semelhante.</p>
+            <textarea id="code">
+switch (true){
+	case testeLogico1 < 5:
+			/*
+			bloco de instruções 1
+			*/
+			break;
+	case testeLogico2 < 3:
+			/*
+			bloco de instruções 2
+			*/
+			break;
+	case testeLogico3 < 1:
+			/*
+			bloco de instruções 3
+			*/
+			break;
+	default:
+			/*
+			bloco de instruções default
+			*/
+			break;
+}
+            </textarea>
+            <a href="https://cainaantunes.notion.site/Java-4267695036f542a9874f7d328bf1a154" target="_blank">
+                <img src="./img/switch.png" alt="" class="img">
+            </a>
+
+            <h3>Estruturas de repetição</h3>
+            <p>Em Java, as estruturas de repetição permitem que um bloco de código seja executado repetidamente enquanto uma condição específica for verdadeira. Elas permitem realizar ações repetitivas ou iterar sobre coleções de dados de forma eficiente. Em Java, as três estruturas de repetição principais são while, do/while e for.</p>
+            <h4>while:</h4>
+            <p>Em Java, o loop while executa um bloco de código enquanto uma condição booleana é verdadeira. Antes de cada iteração do loop, a condição é verificada. Isso significa que, se a condição for falsa na primeira verificação, o loop pode não ser executado nenhuma vez.</p>
+            <textarea id="code">
+int i = 0
+
+while(i < 10){
+    /*
+    bloco de instruções
+    */
+    i++
+}
+            </textarea>
+            <a href="https://cainaantunes.notion.site/Java-4267695036f542a9874f7d328bf1a154" target="_blank">
+                <img src="./img/while.png" alt="" class="img">
+            </a>
+
+            <h4>do/while:</h4>
+            <p>Em Java, o loop do/while é idêntico ao loop do while, mas após a execução do bloco de código, a condição booleana é verificada. Não importa se a condição é verdadeira ou falsa, isso garante que o bloco de código seja executado pelo menos uma vez.</p>
+            <textarea id="code">
+int i = 0
+
+do{
+    /*
+    bloco de intruções
+    */
+}while(i<=0)
+            </textarea>
+            <a href="https://cainaantunes.notion.site/Java-4267695036f542a9874f7d328bf1a154" target="_blank">
+                <img src="./img/dowhile.png" alt="" class="img">
+            </a>
+
+            <h4>for:</h4>
+            <p>Em Java, o loop for é frequentemente usado quando você sabe quantas vezes um bloco de código precisa ser executado. É capaz de inicializar uma variável de controle, estabelecer uma condição de término e, em cada iteração, aumentar ou diminuir a variável de controle. É particularmente útil para iterar sobre coleções e arrays.</p>
+            <textarea id="code">
+for (int i=0; i < 5;i++){
+    /*
+    bloco de instruções
+    */
+}                
+            </textarea>
+            <a href="https://cainaantunes.notion.site/Java-4267695036f542a9874f7d328bf1a154" target="_blank">
+                <img src="./img/for.png" alt="" class="img">
+            </a>
+
+            <h3>Vetores</h3>
+            <p>Vetores, também conhecidos como arrays unidimensionais, são estruturas de dados que armazenam uma coleção de elementos do mesmo tipo que podem ser acessados por um índice. Eles armazenam listas de elementos e permitem acesso rápido a cada elemento.</p>
+            <textarea id="code">
+// Declaração e inicialização de um vetor de inteiros
+int[] numeros = {1, 2, 3, 4, 5};
+                
+// Acessando elementos do vetor
+System.out.println(numeros[0]); // Saída: 1
+System.out.println(numeros[4]); // Saída: 5
+                
+// Modificando um elemento do vetor
+numeros[2] = 10;
+System.out.println(numeros[2]); // Saída: 10                
+            </textarea>
+
+            <h3>Matrizes</h3>
+            <p>Estruturas de dados conhecidas como arrays multidimensionais armazenam coleções de elementos de várias dimensões, como linhas e colunas. A matriz bidimensional, que pode ser visualizada como uma tabela de elementos, é a mais comumente encontrada. Para representar dados em grades e tabelas, eles são úteis.</p>
+            <textarea id="code">
+// Declaração e inicialização de uma matriz de inteiros 2x3
+int[][] matriz = {
+    {1, 2, 3},
+    {4, 5, 6}
+};
+                
+// Acessando elementos da matriz
+System.out.println(matriz[0][0]); // Saída: 1
+System.out.println(matriz[1][2]); // Saída: 6
+                
+// Modificando um elemento da matriz
+matriz[0][1] = 20;
+System.out.println(matriz[0][1]); // Saída: 20                               
+            </textarea>
+
+            <h3>Funções</h3>
+            <p>Em Java, as funções, também conhecidas como métodos, são blocos de código que realizam uma tarefa específica e podem ser reutilizados em várias partes do programa. Elas ajudam a organizar o código e torná-lo mais legível e fácil de manter. Para receber dados de entrada, uma função pode usar parâmetros, processá-los e gerar um resultado. Existem vários tipos de funções, incluindo funções que retornam um valor usando a palavra-chave return ou funções que não retornam nada usando void. As funções também podem ser sobrecarregadas para aceitar vários conjuntos de parâmetros.</p>
+            <textarea id="code">
+public class Main {
+    // Função que retorna a soma de dois números
+    public int soma(int a, int b) {
+        return a + b;
+    }
+                
+    // Função que imprime uma mensagem
+    public void imprimeMensagem(String mensagem) {
+        System.out.println(mensagem);
+    }
+                
+    public static void main(String[] args) {
+        Main exemplo = new Main();
+                        
+        int resultado = exemplo.soma(5, 10);
+        System.out.println("Resultado da soma: " + resultado);
+                
+        exemplo.imprimeMensagem("Olá, mundo!");
+    }
+}                                         
+            </textarea>
+
+            <h3>Funções Recursivas</h3>
+            <p>Funções recursivas são aquelas que chamam a si mesmas para resolver um problema que pode ser dividido em outros problemas semelhantes. Elas são particularmente úteis para problemas com estruturas repetitivas ou que podem ser definidas como estruturas independentes. Para evitar loops infinitos e stack overflow, a recursão deve sempre ter uma condição de parada.</p>
+            <textarea id="code">
+public class Main {
+    // Função recursiva para calcular o fatorial de um número
+    public int fatorial(int n) {
+        if (n <= 1) { // Condição de parada
+            return 1;
+        } else {
+            return n * fatorial(n - 1); // Chamada recursiva
+            }
+        }
+                
+    // Função recursiva para calcular o enésimo número da sequência de Fibonacci
+    public int fibonacci(int n) {
+        if (n <= 0) {
+            return 0; // Primeiro número da sequência é 0
+        } else if (n == 1) {
+            return 1; // Segundo número da sequência é 1
+        } else {
+            return fibonacci(n - 1) + fibonacci(n - 2); // Soma dos dois números anteriores
+        }
+    }
+                
+    public static void main(String[] args) {
+        Main exemplo = new Main();
+                
+        int fatorialResultado = exemplo.fatorial(5);
+        System.out.println("Fatorial de 5: " + fatorialResultado);
+                
+        int fibonacciResultado = exemplo.fibonacci(10);
+        System.out.println("Fibonacci de 10: " + fibonacciResultado);
+    }
+}
+            </textarea>
+
+        </section>
+    </main>
+    <footer>
+        <p>Confira meu <a href="https://github.com/sinkevirns/Exercicios/tree/master/linguagemdeProgramação" style="color: white;" target="_blank">GitHub</a> de Linguagem de Programação.</p>
+    </footer>
+</body>
+</html>
