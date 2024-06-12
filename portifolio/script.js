@@ -7,3 +7,5 @@ function loadPage(page) {
         })
         .catch(error => console.error('Error loading page:', error));
 }
+
+document.getElementById("meuTextarea").readOnly = true;

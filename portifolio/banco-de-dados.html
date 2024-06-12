@@ -41,7 +41,7 @@
                 
             <h4>Comandos DDL - Data Definition Language:</h4>
             <p>A estrutura dos objetos de banco de dados, como tabelas, índices e esquemas, pode ser definida e controlada por comandos da linguagem de definição de dados, ou DDL. Os comandos CREATE, ALTER, DROP e TRUNCATE, que fazem parte do DDL, dão a você a capacidade de criar novas tabelas, alterar estruturas existentes, excluir tabelas e remover todos os registros de uma tabela sem alterar sua estrutura. Esses comandos são essenciais para a criação e manutenção da estrutura de um banco de dados, que garante que os dados sejam armazenados de forma eficiente e organizada. A seguir está um exemplo de consulta com com comentários explicando o código:</p>
-            <textarea id="code">
+            <textarea id="code" readonly>
 -- CREATE TABLE (Cria tabelas)
 CREATE TABLE alunos (
 -- Restrições
@@ -76,7 +76,7 @@ DROP TABLE alunos;
                 </textarea>
                 <h4>Comandos DML - Data Manipulation Language:</h4>
                 <p>Os comandos de manipulação de dados, também conhecidos como DML, podem ser usados para inserir, atualizar, deletar e consultar dados em um banco de dados. INSERT, UPDATE, DELETE e SELECT são os comandos DML principais. Usando INSERT, você pode adicionar registros adicionais a uma tabela, UPDATE pode alterar dados já existentes, DELETE pode remover registros e SELECT pode recuperar dados do banco de dados. Esses comandos são essenciais para o gerenciamento e manipulação de dados armazenados, pois permitem que os usuários realizem as operações básicas de CRUD (Criar, Ler, Atualizar e Remover) no banco de dados. A seguir está um exemplo de consulta com comentários explicando o código:</p>
-                <textarea id="code">
+                <textarea id="code" readonly>
 -- INSERT (Inserir dados na tabela (é necessar saber a ordem das colunas))
 INSERT INTO alunos (nome)
 VALUES ('Rafael');
@@ -90,7 +90,7 @@ SELECT * FROM alunos;
 
                 <h4>Comandos DQL - Data Query Language</h4>
                 <p>Para consultar e recuperar dados em um banco de dados, use os comandos DQL (Data Query Language). O comando SELECT é o principal comando do DQL; permite que você especifique quais colunas e tabelas deseja obter dados, bem como condições e filtros para melhorar os resultados. DQL é essencial para a análise e extração de informações valiosas dos dados, pois permite consultas simples e complexas, como agregações, junções, ordenações e agrupamentos. A seguir está um exemplo de consulta com comentários explicando o código:</p>
-                <textarea id="code">
+                <textarea id="code" readonly>
 -- SELECT (Visualiza uma coluna específica)
 SELECT nome FROM alunos
 
@@ -174,5 +174,6 @@ SELECT x FROM test1 GROUP BY x;
     <footer>
         <p>Confira meu <a href="https://github.com/sinkevirns/Exercicios/tree/master/bancodeDados" style="color: white;" target="_blank">GitHub</a> de Banco de Dados.</p>
     </footer>
+    <script src="script.js"></script>
 </body>
 </html>
