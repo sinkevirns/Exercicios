@@ -43,11 +43,24 @@ import matplotlib.pyplot as plt # Plotar gráficos
 df = pd.read_excel('https://github.com/PinkWink/ML_tutorial/raw/master/dataset/titanic.xls')
 df
             </textarea>
+            <h4>Output:</h4>
+            <textarea id="code">
+pclass	survived	name	sex	age	sibsp	parch	ticket	fare	cabin	embarked	boat	body	home.dest
+0	1	1	Allen, Miss. Elisabeth Walton	female	29.0000	0	0	24160	211.3375	B5	S	2	NaN	St Louis, MO
+1	1	1	Allison, Master. Hudson Trevor	male	0.9167	1	2	113781	151.5500	C22 C26	S	11	NaN	Montreal, PQ / Chesterville, ON
+2	1	0	Allison, Miss. Helen Loraine	female	2.0000	1	2	113781	151.5500	C22 C26	S	NaN	NaN	Montreal, PQ / Chesterville, ON
+3	1	0	Allison, Mr. Hudson Joshua Creighton	male	30.0000	1	2	113781	151.5500	C22 C26	S	NaN	135.0	Montreal, PQ / Chesterville, ON
+4	1	0	Allison, Mrs. Hudson J C (Bessie Waldo Daniels)	female	25.0000	1	2	113781	151.5500	C22 C26	S	NaN	NaN	Montreal, PQ / Chesterville, ON
+...	...	...	...	...	...	...	...	...	...	...	...	...	...	...
+1304	3	0	Zabour, Miss. Hileni	female	14.5000	1	0	2665	14.4542	NaN	C	NaN	328.0	NaN
+1305	3	0	Zabour, Miss. Thamine	female	NaN	1	0	2665	14.4542	NaN	C	NaN	NaN	NaN
+1306	3	0	Zakarian, Mr. Mapriededer	male	26.5000	0	0	2656	7.2250	NaN	C	NaN	304.0	NaN
+1307	3	0	Zakarian, Mr. Ortin	male	27.0000	0	0	2670	7.2250	NaN	C	NaN	NaN	NaN
+1308	3	0	Zimmerman, Mr. Leo	male	29.0000	0	0	315082	7.8750	NaN	S	NaN	NaN	NaN
+            </textarea>
 
-            <img src="./img/titanic.png" class="img">
-            
-            <li>Amostragem: Técnicas de seleção de subconjuntos de dados para análise.</li>
             <h3>Amostra Aleatória</h3>
+            <p>A amostragem aleatória permite que todos os indivíduos da população tenham chances iguais e independentes de ser selecionados. Essa abordagem garante que a amostra seja representativa da população como um todo, reduzindo assim os vieses. A seleção é totalmente randomizada e pode ser feita por sorteios, geradores de números aleatórios ou outros métodos.</p>
             <textarea id="code">
 #df.iloc[1,2] #selecionar uma celula do df (linha e coluna)
 #df.iloc[1:5,2:4] # selecionando intervalos
@@ -74,6 +87,7 @@ amostra4 = df.iloc[10:50].sample(10) #amostra entre um intervalo
 '''
             </textarea>
             <h3>Amostra Sistemática</h3>
+            <p>A amostragem sistemática é uma abordagem na qual os componentes são escolhidos a partir de intervalos regulares de uma lista ordenada de populações. A cada k-ésimo elemento é selecionado após a determinação de um ponto de partida aleatório; k é um número fixo determinado pela divisão do tamanho da população pelo tamanho da amostra pretendida. Embora seja fácil e eficaz, este método requer que a lista da população não seja cíclica e não inclua vieses.</p>
             <textarea id="code">
 # função numpy arange -> gera um array a partir de um intervalo
 # assinatura da função: np.arange(init,final,step)
@@ -90,6 +104,7 @@ lines
 #amostraSistematica = df.iloc[np.random.randint(0,1309 - size * step,1)]
             </textarea>
             <h3>Amostra Estrátificada</h3>
+            <p>A amostragem estratificada é um método de amostragem em que a população é dividida em subgrupos homogêneos ou estratos de acordo com idades, gêneros e níveis socioeconômicos. Uma amostra aleatória é então extraída de cada estrato. Este método garante que todas as subpopulações pertinentes estejam representadas na amostra. Isso aumenta a precisão e a representatividade dos resultados finais.</p>
             <textarea id="code">
 #all_male = df.loc[df['sex']=='male']
 #sample_male = all_male.sample(8)
@@ -108,7 +123,67 @@ all_female = df.loc[df['sex']=='female']
 sample_female = all_female.sample(round(all_female.shape[0]*0.01)) #amostra de 1% / round arredonda o número
 sample_female
             </textarea>
-            <li>Tendências Centrais: Cálculo e interpretação de médias, medianas e modas.</li>
+
+            <h4>Output:</h4>
+<textarea id="code">
+pclass	survived	name	sex	age	sibsp	parch	ticket	fare	cabin	embarked	boat	body	home.dest
+1123	3	1	Peter, Mrs. Catherine (Catherine Rizk)	female	NaN	0	2	2668	22.3583	NaN	C	D	NaN	NaN
+865	3	0	Henry, Miss. Delia	female	NaN	0	0	382649	7.7500	NaN	Q	NaN	NaN	NaN
+441	2	1	Hewlett, Mrs. (Mary D Kingcome)	female	55.0	0	0	248706	16.0000	NaN	S	13	NaN	India / Rapid City, SD
+227	1	1	Pears, Mrs. Thomas (Edith Wearne)	female	22.0	1	0	113776	66.6000	C2	S	8	NaN	Isleworth, England
+886	3	1	Jermyn, Miss. Annie	female	NaN	0	0	14313	7.7500	NaN	Q	D	NaN	NaN  
+</textarea>
+
+<textarea id="code">
+stratify_sample = pd.concat([sample_male,sample_female])
+stratify_sample
+</textarea>
+
+<h4>Output:</h4>
+<textarea id="code">
+pclass	survived	name	sex	age	sibsp	parch	ticket	fare	cabin	embarked	boat	body	home.dest
+332	2	0	Baimbrigge, Mr. Charles Robert	male	23.0	0	0	C.A. 31030	10.5000	NaN	S	NaN	NaN	Guernsey
+1025	3	1	Moor, Master. Meier	male	6.0	0	1	392096	12.4750	E121	S	14	NaN	NaN
+510	2	0	Mudd, Mr. Thomas Charles	male	16.0	0	0	S.O./P.P. 3	10.5000	NaN	S	NaN	NaN	Halesworth, England
+408	2	0	Fillbrook, Mr. Joseph Charles	male	18.0	0	0	C.A. 15185	10.5000	NaN	S	NaN	NaN	Cornwall / Houghton, MI
+9	1	0	Artagaveytia, Mr. Ramon	male	71.0	0	0	PC 17609	49.5042	NaN	C	NaN	22.0	Montevideo, Uruguay
+135	1	0	Goldschmidt, Mr. George B	male	71.0	0	0	PC 17754	34.6542	A5	C	NaN	NaN	New York, NY
+913	3	1	Karlsson, Mr. Einar Gervasius	male	21.0	0	0	350053	7.7958	NaN	S	13	NaN	NaN
+426	2	0	Hale, Mr. Reginald	male	30.0	0	0	250653	13.0000	NaN	S	NaN	75.0	Auburn, NY
+1123	3	1	Peter, Mrs. Catherine (Catherine Rizk)	female	NaN	0	2	2668	22.3583	NaN	C	D	NaN	NaN
+865	3	0	Henry, Miss. Delia	female	NaN	0	0	382649	7.7500	NaN	Q	NaN	NaN	NaN
+441	2	1	Hewlett, Mrs. (Mary D Kingcome)	female	55.0	0	0	248706	16.0000	NaN	S	13	NaN	India / Rapid City, SD
+227	1	1	Pears, Mrs. Thomas (Edith Wearne)	female	22.0	1	0	113776	66.6000	C2	S	8	NaN	Isleworth, England
+886	3	1	Jermyn, Miss. Annie	female	NaN	0	0	14313	7.7500	NaN	Q	D	NaN	NaN  
+</textarea>
+
+<textarea id="code">
+from sklearn.model_selection import train_test_split
+
+variavel = df['sex']
+#train, test = train_test_split(df, test_size=0.01, stratify=variavel);
+resto, amostra = train_test_split(df, test_size=0.01, stratify=variavel);
+amostra
+</textarea>
+
+<h4>Output:</h4>
+<textarea id="code">
+pclass	survived	name	sex	age	sibsp	parch	ticket	fare	cabin	embarked	boat	body	home.dest
+163	1	1	Holverson, Mrs. Alexander Oskar (Mary Aline To...	female	35.0	1	0	113789	52.0000	NaN	S	8	NaN	New York, NY
+572	2	1	Trout, Mrs. William H (Jessie L)	female	28.0	0	0	240929	12.6500	NaN	S	NaN	NaN	Columbus, OH
+292	1	1	Taylor, Mr. Elmer Zebley	male	48.0	1	0	19996	52.0000	C126	S	5 7	NaN	London / East Orange, NJ
+1017	3	1	Midtsjo, Mr. Karl Albert	male	21.0	0	0	345501	7.7750	NaN	S	15	NaN	NaN
+177	1	1	Kimball, Mr. Edwin Nelson Jr	male	42.0	1	0	11753	52.5542	D19	S	5	NaN	Boston, MA
+1160	3	0	Rouse, Mr. Richard Henry	male	50.0	0	0	A/5 3594	8.0500	NaN	S	NaN	NaN	NaN
+24	1	1	Bird, Miss. Ellen	female	29.0	0	0	PC 17483	221.7792	C97	S	8	NaN	NaN
+623	3	0	Andersson, Miss. Ebba Iris Alfrida	female	6.0	4	2	347082	31.2750	NaN	S	NaN	NaN	Sweden Winnipeg, MN
+1053	3	0	Nasr, Mr. Mustafa	male	NaN	0	0	2652	7.2292	NaN	C	NaN	NaN	NaN
+605	3	1	Abelseth, Mr. Olaus Jorgensen	male	25.0	0	0	348122	7.6500	F G63	S	A	NaN	Perkins County, SD
+725	3	1	Connolly, Miss. Kate	female	22.0	0	0	370373	7.7500	NaN	Q	13	NaN	Ireland
+900	3	0	Johnston, Master. William Arthur "Willie"	male	NaN	1	2	W./C. 6607	23.4500	NaN	S	NaN	NaN	NaN
+462	2	0	Jefferys, Mr. Clifford Thomas	male	24.0	2	0	C.A. 31029	31.5000	NaN	S	NaN	NaN	Guernsey / Elizabeth, NJ
+705	3	0	Caram, Mr. Joseph	male	NaN	1	0	2689	14.4583	NaN	C	NaN	NaN	Ottawa, ON  
+</textarea>
             <h3>Modal</h3>
             <textarea id="code">
 modal = pd.DataFrame([35, 37, 36, 34, 38, 35, 37, 37, 33, 36, 38, 37,35, 37, 34, 33, 37, 36, 35, 38, 36, 35, 36, 37, 38, 39, 37, 37, 36, 37, 33, 37, 35, 37, 39])
