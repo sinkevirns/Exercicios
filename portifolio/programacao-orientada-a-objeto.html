@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orientação a Objeto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Orientada a Objeto</h1>
+        <nav>
+            <a href="index.html">Voltar para a Página Principal</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Resumo da Matéria</h2>
+            <h3>Introdução</h3>
+            <p>Estudamos conceitos essenciais como encapsulamento, métodos construtores, método toString, diagramas UML, classes Java, classes estáticas, sobrecarga de métodos, exceções, herança, métodos abstratos, polimorfismo e JavaFX na disciplina de Orientação a Objetos em Java. Esses assuntos fornecem a base para o desenvolvimento de programas robustos e reutilizáveis, e o uso dos princípios da programação orientada a objetos para a criação de aplicações complexas e eficazes é possível.</p>
+            
+            <h3>IntelliJ:</h3>
+                <div class="container">
+                    <a href="https://www.jetbrains.com/pt-br/idea/" target="_blank">
+                        <img src="./img/IntelliJ.png" alt="" class="img">
+                    </a>
+                    <p>O IntelliJ IDEA é um ambiente de desenvolvimento integrado (IDE) popular entre os desenvolvedores que fazem software em várias linguagens de programação, principalmente Java. O IntelliJ IDEA, desenvolvido pela JetBrains, tem funcionalidades sofisticadas como autocompletar inteligente, refatoração de código, depuração integrada, análise estática, ferramentas de teste e integração com sistemas de controle de versão como Git. Suas funcionalidades extensas e interfaces fáceis de usar aumentam a produtividade dos desenvolvedores, tornando o processo de desenvolvimento mais agradável e eficiente.</p>
+                </div>
+            
+                <h3>Estrutura de uma Classe</h3>
+                <p>O plano de um objeto em Java, que inclui seus atributos (variáveis) e métodos (funções), é definido pela estrutura de uma classe. Estou listando alguns dos componentes essenciais de uma classe:</p>
+                <h3>Encapsulamento</h3>
+                <p>O princípio por trás do encapsulamento é que ele restringe o acesso direto aos dados de um objeto e permite apenas a manipulação por métodos definidos. Isso é feito por meio de modificadores de acesso privado, protegido e público. O encapsulamento protege e preserva a integridade dos dados.</p>
+                <textarea id="code" readonly>
+public class Pessoa {
+    private String nome;
+    private int idade;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+}
+                </textarea>
+                <h3>Método Construtor</h3>
+                <p>Quando você cria uma nova instância da classe, usa o método construtor. Ele pode inicializar objetos da classe e ser sobrecarregado para aceitar vários conjuntos de parâmetros.</p>
+                <textarea id="code" readonly>
+public class Pessoa {
+    private String nome;
+    private int idade;
+
+    // Construtor padrão
+    public Pessoa() {
+    }
+
+    // Construtor com parâmetros
+    public Pessoa(String nome, int idade) {
+        this.nome = nome;
+        this.idade = idade;
+    }
+}
+                </textarea>
+                <h3>Método toString</h3>
+                <p>Um método único chamado método toString retorna uma representação do objeto em uma string. É útil para imprimir as características de um objeto de forma legível.</p>
+                <textarea id="code" readonly>
+public class Pessoa {
+    private String nome;
+    private int idade;
+
+    public Pessoa(String nome, int idade) {
+        this.nome = nome;
+        this.idade = idade;
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa{nome='" + nome + "', idade=" + idade + '}';
+    }
+}
+                </textarea>
+
+                <h3>Diagrama de Classes</h3>
+                <p>Um tipo importante de diagrama UML (Unified Modeling Language) é o diagrama de classes, que mostra a estrutura estática de um sistema orientado a objetos. Ele mostra as categorias do sistema, suas características, métodos e as relações entre eles. O diagrama de classes contém os seguintes componentes principais:</p>
+                <a href="https://cainaantunes.notion.site/Programa-o-Orientada-Objeto-f646e6f4936c4d68b90eb45ff5b2bc37" target="_blank">
+                    <img src="./img/classes.jpeg" alt="" class="img">
+                </a>
+                <li>Classes: Representam entidades ou objetos do sistema, exibindo seus atributos (variáveis) e métodos (funções).</li>
+                <li>Atributos: Características ou propriedades de uma classe.</li>
+                <li>Métodos: Comportamentos ou funções que a classe pode realizar.</li>
+                <li>Associações: Relacionamentos entre classes, como agregação, composição e herança.</li>
+                <a href="https://cainaantunes.notion.site/Programa-o-Orientada-Objeto-f646e6f4936c4d68b90eb45ff5b2bc37" target="_blank">
+                    <img src="./img/associacao.jpg" alt="" class="img">
+                </a>
+                <li>Generalização: Representa um relacionamento "é-um" entre uma classe mais genérica (superclasse) e uma classe mais específica (subclasse). Este relacionamento, conhecido como herança, permite que a subclasse transmita métodos e atributos da superclasse.</li>
+                <a href="https://cainaantunes.notion.site/Programa-o-Orientada-Objeto-f646e6f4936c4d68b90eb45ff5b2bc37" target="_blank">
+                    <img src="./img/generalizacao.jpg" alt="" class="img">
+                </a>
+
+                <h3>Classes Java</h3>
+                <p>O núcleo da programação orientada a objetos na linguagem Java são as classes Java. Elas estabelecem a estrutura e o comportamento dos objetos encapsulando os dados (atributos) e as operações (métodos) que podem ser executadas sobre eles. Os seguintes elementos compõem uma classe, que funciona como um modelo para a criação de objetos (instâncias):</p>
+                <li>Atributos: Variáveis que armazenam o estado dos objetos.</li>
+                <li>Métodos: Funções que definem o comportamento dos objetos.</li>
+                <li>Construtores: Métodos especiais que são chamados quando um objeto é criado para inicializar os atributos.</li>
+                <textarea id="code" readonly>
+public class Pessoa {
+    // Atributos
+    private String nome;
+    private int idade;
+
+    // Construtor
+    public Pessoa(String nome, int idade) {
+        this.nome = nome;
+        this.idade = idade;
+    }
+
+    // Métodos
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa{nome='" + nome + "', idade=" + idade + '}';
+    }
+}
+                </textarea>
+                <h3>Utilização da Classe</h3>
+                <textarea id="code" readonly>
+public class Main {
+    public static void main(String[] args) {
+        // Criação de um objeto Pessoa
+        Pessoa pessoa = new Pessoa("João", 30);
+
+        // Utilização dos métodos
+        System.out.println(pessoa.getNome()); // Output: João
+        System.out.println(pessoa.getIdade()); // Output: 30
+
+        // Modificação dos atributos
+        pessoa.setNome("Maria");
+        pessoa.setIdade(25);
+
+        // Impressão do objeto utilizando o método toString
+        System.out.println(pessoa.toString()); // Output: Pessoa{nome='Maria', idade=25}
+    }
+}
+                </textarea>
+
+                <h3>Classes Estáticas</h3>
+                <p>Em Java, as classes estáticas são definidas como classes staticas e não podem ser instanciadas. Geralmente, essas classes servem como contêineres para métodos e variáveis que pertencem à classe em si, em vez de instâncias de objetos.</p>
+                <textarea id="code" readonly>
+public class Utilidades {
+    // Classe estática aninhada
+    public static class Calculadora {
+        // Método estático
+        public static int somar(int a, int b) {
+            return a + b;
+        }
+
+        public static int subtrair(int a, int b) {
+            return a - b;
+        }
+    }
+}
+                </textarea>
+                <h3>Utilização da Classe</h3>
+                <textarea id="code" readonly>
+public class Main {
+    public static void main(String[] args) {
+        // Acesso direto aos métodos estáticos da classe estática aninhada
+        int soma = Utilidades.Calculadora.somar(5, 3);
+        int subtracao = Utilidades.Calculadora.subtrair(5, 3);
+
+        System.out.println("Soma: " + soma); // Output: Soma: 8
+        System.out.println("Subtração: " + subtracao); // Output: Subtração: 2
+    }
+}
+                </textarea>
+
+                <h3>Sobrecarga de Métodos</h3>
+                <p>Em Java, a sobrecarga de métodos permite que uma classe contenha dois ou mais métodos com o mesmo nome, desde que os parâmetros sejam diferentes. Esses métodos podem usar uma variedade de tipos de parâmetros, quantidades ou ordens.</p>
+                <textarea id="code" readonly>
+public class Calculadora {
+    // Método soma para inteiros
+    public int somar(int a, int b) {
+        return a + b;
+    }
+
+    // Método soma para double
+    public double somar(double a, double b) {
+        return a + b;
+    }
+
+    // Método soma para três inteiros
+    public int somar(int a, int b, int c) {
+        return a + b + c;
+    }
+}
+                </textarea>
+                <h3>Utilização da Sobrecarga de Métodos</h3>
+                <textarea id="code" readonly>
+public class Main {
+    public static void main(String[] args) {
+        Calculadora calc = new Calculadora();
+
+        int resultado1 = calc.somar(3, 5); // Chama o primeiro método
+        double resultado2 = calc.somar(2.5, 3.7); // Chama o segundo método
+        int resultado3 = calc.somar(1, 2, 3); // Chama o terceiro método
+
+        System.out.println("Resultado 1: " + resultado1); // Output: Resultado 1: 8
+        System.out.println("Resultado 2: " + resultado2); // Output: Resultado 2: 6.2
+        System.out.println("Resultado 3: " + resultado3); // Output: Resultado 3: 6
+    }
+}
+
+                </textarea>
+
+                <h3>Exceções</h3>
+                <p>Em Java, as exceções são eventos que ocorrem durante a execução do programa e interrompem a execução normal do programa. Elas representam circunstâncias anormais que podem ocorrer durante o programa e precisam ser abordadas. </p>
+                <li>Bloco try-catch: O bloco try inclui o código capaz de gerar uma exceção, enquanto o bloco catch captura e trata a exceção caso ela ocorra.</li>
+                <li>Lançamento de Exceções: É possível lançar manualmente exceções usando a palavra-chave throw.</li>
+                <h4>Tratamento de Exceções</h4>
+                <textarea id="code" readonly>
+public class ExcecoesExemplo {
+    public static void main(String[] args) {
+        try {
+            int resultado = dividir(10, 0);
+            System.out.println("Resultado: " + resultado);
+        } catch (ArithmeticException ex) {
+            System.out.println("Erro: Divisão por zero.");
+        } finally {
+            System.out.println("Fim do programa.");
+        }
+    }
+
+    public static int dividir(int dividendo, int divisor) {
+        if (divisor == 0) {
+            throw new ArithmeticException("Divisão por zero");
+        }
+        return dividendo / divisor;
+    }
+}
+                </textarea>
+                <h3>Herança</h3>
+                <p>Um mecanismo conhecido como herança em Java permite que uma classe herde métodos e campos de outra classe. A criação de hierarquias de classes e a reutilização de código são ambas incentivadas por ela. </p>
+                <li>Superclasse e Subclasse: A classe que é estendida é chamada de superclasse, e a classe que estende é chamada de subclasse.</li>
+                <a href="https://cainaantunes.notion.site/Programa-o-Orientada-Objeto-f646e6f4936c4d68b90eb45ff5b2bc37">
+                    <img src="./img/superclasse.png" alt="" class="img">
+                </a>
+                <li>Palavra-chave extends: A herança é estabelecida na declaração de classe usando a palavra-chave extends.</li>
+                <li>Membros Herdados: A subclasse herda todos os membros (métodos e campos) da superclasse, exceto construtores privados e métodos/final/estáticos.</li>
+                <textarea id="code" readonly>
+public class Animal {
+    public void fazerSom() {
+        System.out.println("Animal fazendo som.");
+    }
+}
+
+public class Cachorro extends Animal {
+    public void latir() {
+        System.out.println("Cachorro latindo.");
+    }
+}
+                </textarea>
+
+                <h3>Classes e Métodos Abstratos</h3>
+                <p>As classes em Java que têm pelo menos um método abstrato e não podem ser instanciadas diretamente são chamadas de classes abstratas. Os métodos abstratos são aqueles que são expressos, mas não são aplicados em uma classe abstrata.</p>
+                <li>Palavra-chave abstract: Uma classe abstrata é declarada usando a palavra-chave abstract.</li>
+                <li>Métodos Abstratos: Métodos abstratos são declarados sem corpo e devem ser implementados por subclasses concretas.</li>
+                <textarea id="code" readonly>
+public abstract class Forma {
+    public abstract double calcularArea();
+}
+
+public class Retangulo extends Forma {
+    private double comprimento;
+    private double largura;
+
+    public Retangulo(double comprimento, double largura) {
+        this.comprimento = comprimento;
+        this.largura = largura;
+    }
+
+    @Override
+    public double calcularArea() {
+        return comprimento * largura;
+    }
+}
+                </textarea>
+
+                <h3>Polimorfismo</h3>
+                <p>Em Java, o polimorfismo é a capacidade de um objeto se comportar de maneiras diferentes dependendo de seu tipo ou implementação de métodos. Isso permite que um método seja aplicado de várias maneiras em várias classes.</p>
+                <li>Sobrescrita de Método: Subclasses podem fornecer uma implementação diferente de um método que já está sendo usado por sua superclasse.</li>
+                <li>Sobrecarga de Método: Classes podem ter vários métodos com o mesmo nome, mas com diferentes parâmetros.</li>
+                <li>Referência de Superclasse: Um objeto de uma subclasse pode ser atribuído a uma variável de sua superclasse.</li>
+                <textarea id="code" readonly>
+public class Animal {
+    public void fazerSom() {
+        System.out.println("Animal fazendo som.");
+    }
+}
+
+public class Cachorro extends Animal {
+    @Override
+    public void fazerSom() {
+        System.out.println("Cachorro latindo.");
+    }
+}
+                </textarea>
+
+                <h3>JavaFX</h3>
+                <p>Uma biblioteca gráfica de plataforma cruzada chamada JavaFX permite o desenvolvimento de aplicativos de desktop com muitos recursos. Ele oferece uma variedade de controles de UI, gráficos, animações e funções multimídia.</p>
+                <textarea id="code" readonly>
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+public class ExemploJavaFX extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+        Button btn = new Button();
+        btn.setText("Clique em mim!");
+        btn.setOnAction(event -> System.out.println("Olá, JavaFX!"));
+
+        StackPane root = new StackPane();
+        root.getChildren().add(btn);
+
+        Scene scene = new Scene(root, 300, 250);
+
+        primaryStage.setTitle("Exemplo JavaFX");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+                </textarea>
+            </section>
+    </main>
+    <footer>
+        <p>Confira meu <a href="https://github.com/sinkevirns/Exercicios/tree/master/linguagemdeProgramação" style="color: white;" target="_blank">GitHub</a> de Orientação a Objeto.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

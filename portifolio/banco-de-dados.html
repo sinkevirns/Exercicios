@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco de Dados</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <header>
+        <h1>Banco de Dados</h1>
+        <nav>
+            <a href="index.html">Voltar para a Página Principal</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Resumo da Matéria</h2>
+            
+            <h3>Introdução</h3>
+            <p>A disciplina de banco de dados estuda conceitos essenciais sobre dados, como como organizar, armazenar e recuperar dados de forma eficaz. Ao longo do curso, abordaremos os princípios dos bancos de dados relacionais, estudando sua estrutura e funções. Também aprenderemos a projetar e manipular dados usando diagramas ER (Entidade-Relacionamento) e comandos como DDL (Descrição de Dados), DML (Desenho de Dados) e DQL (Pergunta de Dados). Além disso, investigamos métodos de normalização até a terceira forma normal, com o objetivo de garantir a eficiência e a integridade dos dados. Este curso fornece uma base sólida para a compreensão e o desenvolvimento de sistemas de banco de dados eficientes e robustos.</p>
+            
+            <h3>PostgreSQL:</h3>
+            <div class="container">
+                <a href="https://www.postgresql.org" target="_blank">
+                    <img src="./img/postgresql.png" alt="" class="img">
+                </a>
+                <p>O PostgreSQL é um sistema de gerenciamento de banco de dados relacional de código aberto que é amplamente usado em aplicativos de código aberto e empresariais. O PostgreSQL é reconhecido pela confiabilidade, escalabilidade e recursos avançados e suporta uma variedade de funcionalidades, como gatilhos, procedimentos armazenados, replicação, integridade referencial e extensibilidade, além de SQL avançado. O PostgreSQL é uma escolha popular para empresas que buscam uma solução de banco de dados relacional confiável e adaptável devido à sua extensa documentação e comunidade de desenvolvedores ativa.</p>
+            </div>
+            
+            <h3>Dados:</h3>
+            <div class="containerl">
+                <p>A disciplina de banco de dados concentra-se nos modelos conceitual, lógico e físico de modelagem, bem como na estrutura de dados. O termo "dados" refere-se à coleta, armazenamento e processamento de dados. Em contraste, a modelagem de dados organiza os dados de forma estruturada. A estrutura de dados envolve a organização lógica ou física dos dados, enquanto os modelos conceitual, lógico e físico ilustram as necessidades de informação de uma organização em vários níveis, desde uma perspectiva geral até a aplicação real em um banco de dados. Para garantir a integridade, eficiência e escalabilidade dos dados armazenados, esses conceitos são essenciais no design de sistemas de banco de dados.</p>
+                <img src="./img/bancodedados.png" alt="">
+            </div>
+
+            <h3>Banco de Dados Relacionais:</h3>
+            <h4>Modelo Entidade Relacionamento (ER):</h4>
+            <p>O Modelo Entidade Relacionamento (ER) é uma técnica de modelagem de dados que permite a visualização da estrutura lógica de um banco de dados em um gráfico. Ele usa entidades que representam coisas do mundo real e relacionamentos que mostram as conexões entre elas. Atributos descrevem as qualidades das entidades e suas conexões. Os diagramas ER visualizam e estruturam os dados, tornam mais fácil entender os requisitos de informação de um sistema e servem como base para a criação de um banco de dados relacional. Este modelo é essencial para garantir que os dados sejam organizados de maneira eficiente e coerente, refletindo as necessidades do negócio ou da aplicação. Exemplo abaixo:</p>
+            <embed src="./pdf/ER.pdf" type="application/pdf" width="100%" height="600px" />
+                
+            <h4>Comandos DDL - Data Definition Language:</h4>
+            <p>A estrutura dos objetos de banco de dados, como tabelas, índices e esquemas, pode ser definida e controlada por comandos da linguagem de definição de dados, ou DDL. Os comandos CREATE, ALTER, DROP e TRUNCATE, que fazem parte do DDL, dão a você a capacidade de criar novas tabelas, alterar estruturas existentes, excluir tabelas e remover todos os registros de uma tabela sem alterar sua estrutura. Esses comandos são essenciais para a criação e manutenção da estrutura de um banco de dados, que garante que os dados sejam armazenados de forma eficiente e organizada. A seguir está um exemplo de consulta com com comentários explicando o código:</p>
+            <textarea id="code" readonly>
+-- CREATE TABLE (Cria tabelas)
+CREATE TABLE alunos (
+-- Restrições
+-- A PRIMARY KEY já incorpora as restrições 
+-- UNIQUE e NOT NULL simultâneamente
+cpf VARCHAR(14) PRIMARY KEY,
+nome VARCHAR(100),
+nascimento DATE,
+rua VARCHAR(100),
+numero VARCHAR(10),
+bairro VARCHAR(50),
+cidade VARCHAR(50),
+estado VARCHAR(2),
+cep VARCHAR(9),
+pais VARCHAR(50)
+);
+
+CREATE TABLE telefones (
+-- Criando uma tabela de telefones que se relaciona com
+-- a tabela de alunos anterior importando a chave primaira
+-- de alunos como uma chave estrangeira
+    cpf VARCHAR(14) REFERENCES alunos,
+    ddd VARCHAR(3),
+    telefone VARCHAR(9)
+);
+
+-- ALTER TABLE (Ex: Adiciona colunas)
+ALTER TABLE alunos ADD ddd int
+
+-- Apaga a tabela
+DROP TABLE alunos;
+                </textarea>
+                <h4>Comandos DML - Data Manipulation Language:</h4>
+                <p>Os comandos de manipulação de dados, também conhecidos como DML, podem ser usados para inserir, atualizar, deletar e consultar dados em um banco de dados. INSERT, UPDATE, DELETE e SELECT são os comandos DML principais. Usando INSERT, você pode adicionar registros adicionais a uma tabela, UPDATE pode alterar dados já existentes, DELETE pode remover registros e SELECT pode recuperar dados do banco de dados. Esses comandos são essenciais para o gerenciamento e manipulação de dados armazenados, pois permitem que os usuários realizem as operações básicas de CRUD (Criar, Ler, Atualizar e Remover) no banco de dados. A seguir está um exemplo de consulta com comentários explicando o código:</p>
+                <textarea id="code" readonly>
+-- INSERT (Inserir dados na tabela (é necessar saber a ordem das colunas))
+INSERT INTO alunos (nome)
+VALUES ('Rafael');
+
+-- DELETE (Com clausula WHERE)
+DELETE FROM alunos WHERE nome = 'Rafael';
+
+-- SELECT (Visualiza toda a tabela)
+SELECT * FROM alunos;
+                </textarea>
+
+                <h4>Comandos DQL - Data Query Language</h4>
+                <p>Para consultar e recuperar dados em um banco de dados, use os comandos DQL (Data Query Language). O comando SELECT é o principal comando do DQL; permite que você especifique quais colunas e tabelas deseja obter dados, bem como condições e filtros para melhorar os resultados. DQL é essencial para a análise e extração de informações valiosas dos dados, pois permite consultas simples e complexas, como agregações, junções, ordenações e agrupamentos. A seguir está um exemplo de consulta com comentários explicando o código:</p>
+                <textarea id="code" readonly>
+-- SELECT (Visualiza uma coluna específica)
+SELECT nome FROM alunos
+
+-- ORDER BY (Exibe a tabela alunos completa com as colunas ordenadas de acordo com a coluna nome Crescente)
+SELECT * FROM alunos ORDER BY nome;
+
+-- JOIN
+-- A clausula FROM pode conter mais que um parâmetro. 
+-- No exemplo abaixo serão exibidas todas as colunas da tabala 1 e 2. 
+-- Obs.: a operação neste caso é de JOIN ("juntar"), ou seja as duas tabelas serão exibidas como se fossem uma única tabela
+SELECT * FROM t1, t2;
+
+-- INNER JOIN (Exibe todas as colunas de ambas as tabelas, porém apenas as linhas que satisfazem a clausula ON)
+SELECT * FROM t1 INNER JOIN t2 ON t1.num = t2.num; 
+
+-- GROUP BY (Agrupa os valores repetido (valores repetidos são exibidos apenas uma vez))
+SELECT x FROM test1 GROUP BY x; 
+                </textarea>
+
+                <h4>Normalização:</h4>
+                <p>Normalização é o processo de organização de dados em um banco de dados. Isso inclui a criação de tabelas e o estabelecimento de relações entre essas tabelas de acordo com as regras projetadas para proteger os dados e tornar o banco de dados mais flexível, eliminando a redundância e a dependência inconsistente.</p>
+                <h4>Primeira Forma Normal - 1FN</h4>
+                <p>Uma tabela está na 1ª FN quando:</p>
+                    <li>Somente possui valores atômicos</li>
+                    <li>Não há grupos de atributos repetidos (há apenas um dado por coluna nas linhas)</li>
+                    <li>Existe uma chave primária</li>
+                    <li>Relação não possui atributos multivalorados ou relações aninhadas</li>
+                <h4>Normalização:</h4>
+                <p>Decomposição de Coluna Composta</p>
+                <a href="https://cainaantunes.notion.site/Banco-de-Dados-12203c13265e4413866aac27bacc4812" target="_blank">
+                    <img src="./img/n1.png" alt="" class="img">
+                </a>
+                <p>Correção de atributos multivalorados</p>
+                <a href="https://cainaantunes.notion.site/Banco-de-Dados-12203c13265e4413866aac27bacc4812" target="_blank">
+                    <img src="./img/n2.png" alt="" class="img">
+                </a>
+
+                <h4>Segunda Forma Normal - 2FN:</h4>
+                <p>Uma tabela está na 2ª FN quando:</p>
+                    <li>Está na 1FN</li>
+                    <li>Não contém dependências parciais</li>
+                <a href="https://cainaantunes.notion.site/Banco-de-Dados-12203c13265e4413866aac27bacc4812" target="_blank">
+                    <img src="./img/n21.png" alt="" class="img">
+                </a>
+                <h4>Normalização:</h4>
+                <a href="https://cainaantunes.notion.site/Banco-de-Dados-12203c13265e4413866aac27bacc4812" target="_blank">    
+                    <img src="./img/n22.png" alt="" class="img">
+                </a>
+
+                <h4>Terceira Forma Normal - 3FN:</h4>
+                <p>Uma tabela está na 3ª FN quando:</p>
+                    <li>Está na 2FN</li>
+                    <li>Não contém dependências transitiva (A relação não deve ter um atributo não-chave funcionalmente determinado por um outro atributo não-chave)</li>
+                <a href="https://cainaantunes.notion.site/Banco-de-Dados-12203c13265e4413866aac27bacc4812" target="_blank">
+                    <img src="./img/n31.png" alt="" class="img">
+                </a>
+                <h4>Normalização:</h4>
+                <a href="https://cainaantunes.notion.site/Banco-de-Dados-12203c13265e4413866aac27bacc4812" target="_blank">    
+                    <img src="./img/n32.png" alt="" class="img">
+                </a>
+
+                <h3>NoSQL:</h3>
+                <h4>Introdução:</h4>
+                <div class="container">
+                    <a href="https://cainaantunes.notion.site/Banco-de-Dados-12203c13265e4413866aac27bacc4812" target="_blank">
+                        <img src="./img/nosql.png" class="img" >
+                    </a>
+                    <p>NoSQL é um tipo de banco de dados que difere dos bancos de dados relacionais comuns (SQL) em como eles organizam os dados para consulta e armazenamento. Os bancos de dados NoSQL usam uma variedade de modelos de dados, incluindo colunas, documentos, grafos e chave-valor, enquanto os bancos de dados relacionais usam tabelas para armazenar dados e consultas SQL para recuperá-los.</p>
+                </div>
+                
+                <h3>MongoDB:</h3>
+                <div class="containerl">
+                    <p>O MongoDB é um dos sistemas de banco de dados NoSQL mais conhecidos e usados. Ele é um banco de dados orientado a documentos, onde os dados são armazenados dentro de coleções em documentos BSON (Binary JSON). Isso permite escalabilidade horizontal e maior flexibilidade no esquema de dados.</p>
+                    <a href="https://www.mongodb.com" target="_blank">
+                        <img src="./img/mongodb.png" class="img">
+                    </a>
+                </div>
+                
+        </section>
+    </main>
+    <footer>
+        <p>Confira meu <a href="https://github.com/sinkevirns/Exercicios/tree/master/bancodeDados" style="color: white;" target="_blank">GitHub</a> de Banco de Dados.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

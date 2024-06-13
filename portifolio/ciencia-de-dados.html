@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ciência de Dados</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Ciência de Dados</h1>
+        <nav>
+            <a href="index.html">Voltar para a Página Principal</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Resumo da Matéria</h2>
+            <h3>Introdução</h3>
+            <p>Amostragem (amostra aleatória, sistemática, estratificada) e tendências centrais (moda, média, média, percentil, quartil) e medidas de dispersão (amplitude, variância) são conceitos essenciais de estatística e análise de dados no campo da ciência de dados. Aplicamos esses conceitos em consultas e análises de dados utilizando a plataforma Google Colab e a linguagem de programação Python. Usamos frequentemente o database do Titanic para praticar e compreender melhor esses métodos estatísticos e analíticos importantes.</p>
+
+            <h3>Colab:</h3>
+            <div class="container">
+              <a href="https://colab.google/" target="_blank">
+                <img src="./img/colab.png" class="img">
+              </a>
+              <p>O Google Colab é uma plataforma gratuita que permite que os notebooks Jupyter sejam executados na nuvem. A análise de dados, aprendizado automático e desenvolvimento de modelos de inteligência artificial são atividades em que ela é amplamente utilizada. Colab vem pré-configurado com bibliotecas populares como NumPy, Pandas e TensorFlow, entre outras, e suporte a Python. Além de permitir que vários usuários trabalhem simultaneamente no mesmo notebook, a plataforma permite a integração com o Google Drive para armazenamento e compartilhamento de arquivos e facilita a colaboração. Além disso, o Colab oferece recursos de GPU para acelerar os cálculos computacionais complexos.</p>
+            </div>
+            
+            <h3>Amostragem:</h3>
+            <p>A amostragem é o processo de analisar uma parte representativa de uma população para chegar a conclusões sobre a população como um todo. Em estatística, esse método é vital para estudar grandes populações com economia de tempo e custos.</p>
+
+            <p>Instalação de bibliotecas</p>
+            <textarea id="codec" readonly>
+# Importando as bibliotecas
+
+import pandas as pd             # Dataframes (Tabelas)
+import numpy as np              # Funções matemáticas
+import matplotlib.pyplot as plt # Plotar gráficos
+            </textarea>
+
+            <p>Importando os dados (Dataframe)</p>
+            <textarea id="codec" readonly>
+df = pd.read_excel('https://github.com/PinkWink/ML_tutorial/raw/master/dataset/titanic.xls')
+df
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+pclass	survived	name	sex	age	sibsp	parch	ticket	fare	cabin	embarked	boat	body	home.dest
+0	1	1	Allen, Miss. Elisabeth Walton	female	29.0000	0	0	24160	211.3375	B5	S	2	NaN	St Louis, MO
+1	1	1	Allison, Master. Hudson Trevor	male	0.9167	1	2	113781	151.5500	C22 C26	S	11	NaN	Montreal, PQ / Chesterville, ON
+2	1	0	Allison, Miss. Helen Loraine	female	2.0000	1	2	113781	151.5500	C22 C26	S	NaN	NaN	Montreal, PQ / Chesterville, ON
+3	1	0	Allison, Mr. Hudson Joshua Creighton	male	30.0000	1	2	113781	151.5500	C22 C26	S	NaN	135.0	Montreal, PQ / Chesterville, ON
+4	1	0	Allison, Mrs. Hudson J C (Bessie Waldo Daniels)	female	25.0000	1	2	113781	151.5500	C22 C26	S	NaN	NaN	Montreal, PQ / Chesterville, ON
+...	...	...	...	...	...	...	...	...	...	...	...	...	...	...
+1304	3	0	Zabour, Miss. Hileni	female	14.5000	1	0	2665	14.4542	NaN	C	NaN	328.0	NaN
+1305	3	0	Zabour, Miss. Thamine	female	NaN	1	0	2665	14.4542	NaN	C	NaN	NaN	NaN
+1306	3	0	Zakarian, Mr. Mapriededer	male	26.5000	0	0	2656	7.2250	NaN	C	NaN	304.0	NaN
+1307	3	0	Zakarian, Mr. Ortin	male	27.0000	0	0	2670	7.2250	NaN	C	NaN	NaN	NaN
+1308	3	0	Zimmerman, Mr. Leo	male	29.0000	0	0	315082	7.8750	NaN	S	NaN	NaN	NaN
+            </textarea>
+
+            <h3>Amostra Aleatória</h3>
+            <p>A amostragem aleatória permite que todos os indivíduos da população tenham chances iguais e independentes de ser selecionados. Essa abordagem garante que a amostra seja representativa da população como um todo, reduzindo assim os vieses. A seleção é totalmente randomizada e pode ser feita por sorteios, geradores de números aleatórios ou outros métodos.</p>
+            <textarea id="codec" readonly>
+#df.iloc[1,2] #selecionar uma celula do df (linha e coluna)
+#df.iloc[1:5,2:4] # selecionando intervalos
+
+#np.random.randint(0,100,2) #np.random.randint(init,final,size) número aleatório dentro de um intervalo
+
+#Colete uma amostra aleatoria de 10 linhas do df titanic
+'''
+#opção 1
+number = [np.random.randint(0,1309,10),:]
+amostra = df.iloc[numbers]
+amostra
+
+#opção 2
+amostra 2 = df.iloc[np.random.randint(0,1309,10),:]
+
+
+# faz a mesma coisa que o outro código, porém sem repetições
+#opção 3
+amostra3 = df.sample(10) #amostra = df.sample(10, replace = True) -> permite repetição
+
+#opção 4
+amostra4 = df.iloc[10:50].sample(10) #amostra entre um intervalo
+'''
+            </textarea>
+            <h3>Amostra Sistemática</h3>
+            <p>A amostragem sistemática é uma abordagem na qual os componentes são escolhidos a partir de intervalos regulares de uma lista ordenada de populações. A cada k-ésimo elemento é selecionado após a determinação de um ponto de partida aleatório; k é um número fixo determinado pela divisão do tamanho da população pelo tamanho da amostra pretendida. Embora seja fácil e eficaz, este método requer que a lista da população não seja cíclica e não inclua vieses.</p>
+            <textarea id="codec" readonly>
+# função numpy arange -> gera um array a partir de um intervalo
+# assinatura da função: np.arange(init,final,step)
+#array = np.arange(0,101,2)
+#array
+
+# Exercício: obtenha uma amostra sistemática do df de tamanho 10 e passo 31
+size = 10
+step = 31
+firstLine = np.random.randint(0,1309-size*step, 1)
+firstLine
+lines = np.arange(firstLine, 1309, step)[:10]
+lines
+#amostraSistematica = df.iloc[np.random.randint(0,1309 - size * step,1)]
+            </textarea>
+            <h3>Amostra Estrátificada</h3>
+            <p>A amostragem estratificada é um método de amostragem em que a população é dividida em subgrupos homogêneos ou estratos de acordo com idades, gêneros e níveis socioeconômicos. Uma amostra aleatória é então extraída de cada estrato. Este método garante que todas as subpopulações pertinentes estejam representadas na amostra. Isso aumenta a precisão e a representatividade dos resultados finais.</p>
+            <textarea id="codec" readonly>
+#all_male = df.loc[df['sex']=='male']
+#sample_male = all_male.sample(8)
+#sample_male
+
+#all_female = df.loc[df['sex']=='female']
+#sample_female = all_female.sample(5)
+#sample_female
+#sample_female.shape #números de linhas e colunas
+
+all_male = df.loc[df['sex']=='male']
+sample_male = all_male.sample(round(all_male.shape[0]*0.01)) #amostra de 1% / round arredonda o número/ shape informa as linhas e as colunas
+sample_male
+
+all_female = df.loc[df['sex']=='female']
+sample_female = all_female.sample(round(all_female.shape[0]*0.01)) #amostra de 1% / round arredonda o número
+sample_female
+            </textarea>
+
+            <h4>Output:</h4>
+<textarea id="codec" readonly>
+pclass	survived	name	sex	age	sibsp	parch	ticket	fare	cabin	embarked	boat	body	home.dest
+1123	3	1	Peter, Mrs. Catherine (Catherine Rizk)	female	NaN	0	2	2668	22.3583	NaN	C	D	NaN	NaN
+865	3	0	Henry, Miss. Delia	female	NaN	0	0	382649	7.7500	NaN	Q	NaN	NaN	NaN
+441	2	1	Hewlett, Mrs. (Mary D Kingcome)	female	55.0	0	0	248706	16.0000	NaN	S	13	NaN	India / Rapid City, SD
+227	1	1	Pears, Mrs. Thomas (Edith Wearne)	female	22.0	1	0	113776	66.6000	C2	S	8	NaN	Isleworth, England
+886	3	1	Jermyn, Miss. Annie	female	NaN	0	0	14313	7.7500	NaN	Q	D	NaN	NaN  
+</textarea>
+
+<textarea id="codec" readonly>
+stratify_sample = pd.concat([sample_male,sample_female])
+stratify_sample
+</textarea>
+
+<h4>Output:</h4>
+<textarea id="codec" readonly>
+pclass	survived	name	sex	age	sibsp	parch	ticket	fare	cabin	embarked	boat	body	home.dest
+332	2	0	Baimbrigge, Mr. Charles Robert	male	23.0	0	0	C.A. 31030	10.5000	NaN	S	NaN	NaN	Guernsey
+1025	3	1	Moor, Master. Meier	male	6.0	0	1	392096	12.4750	E121	S	14	NaN	NaN
+510	2	0	Mudd, Mr. Thomas Charles	male	16.0	0	0	S.O./P.P. 3	10.5000	NaN	S	NaN	NaN	Halesworth, England
+408	2	0	Fillbrook, Mr. Joseph Charles	male	18.0	0	0	C.A. 15185	10.5000	NaN	S	NaN	NaN	Cornwall / Houghton, MI
+9	1	0	Artagaveytia, Mr. Ramon	male	71.0	0	0	PC 17609	49.5042	NaN	C	NaN	22.0	Montevideo, Uruguay
+135	1	0	Goldschmidt, Mr. George B	male	71.0	0	0	PC 17754	34.6542	A5	C	NaN	NaN	New York, NY
+913	3	1	Karlsson, Mr. Einar Gervasius	male	21.0	0	0	350053	7.7958	NaN	S	13	NaN	NaN
+426	2	0	Hale, Mr. Reginald	male	30.0	0	0	250653	13.0000	NaN	S	NaN	75.0	Auburn, NY
+1123	3	1	Peter, Mrs. Catherine (Catherine Rizk)	female	NaN	0	2	2668	22.3583	NaN	C	D	NaN	NaN
+865	3	0	Henry, Miss. Delia	female	NaN	0	0	382649	7.7500	NaN	Q	NaN	NaN	NaN
+441	2	1	Hewlett, Mrs. (Mary D Kingcome)	female	55.0	0	0	248706	16.0000	NaN	S	13	NaN	India / Rapid City, SD
+227	1	1	Pears, Mrs. Thomas (Edith Wearne)	female	22.0	1	0	113776	66.6000	C2	S	8	NaN	Isleworth, England
+886	3	1	Jermyn, Miss. Annie	female	NaN	0	0	14313	7.7500	NaN	Q	D	NaN	NaN  
+</textarea>
+
+<textarea id="codec" readonly>
+from sklearn.model_selection import train_test_split
+
+variavel = df['sex']
+#train, test = train_test_split(df, test_size=0.01, stratify=variavel);
+resto, amostra = train_test_split(df, test_size=0.01, stratify=variavel);
+amostra
+</textarea>
+
+<h4>Output:</h4>
+<textarea id="codec" readonly>
+pclass	survived	name	sex	age	sibsp	parch	ticket	fare	cabin	embarked	boat	body	home.dest
+163	1	1	Holverson, Mrs. Alexander Oskar (Mary Aline To...	female	35.0	1	0	113789	52.0000	NaN	S	8	NaN	New York, NY
+572	2	1	Trout, Mrs. William H (Jessie L)	female	28.0	0	0	240929	12.6500	NaN	S	NaN	NaN	Columbus, OH
+292	1	1	Taylor, Mr. Elmer Zebley	male	48.0	1	0	19996	52.0000	C126	S	5 7	NaN	London / East Orange, NJ
+1017	3	1	Midtsjo, Mr. Karl Albert	male	21.0	0	0	345501	7.7750	NaN	S	15	NaN	NaN
+177	1	1	Kimball, Mr. Edwin Nelson Jr	male	42.0	1	0	11753	52.5542	D19	S	5	NaN	Boston, MA
+1160	3	0	Rouse, Mr. Richard Henry	male	50.0	0	0	A/5 3594	8.0500	NaN	S	NaN	NaN	NaN
+24	1	1	Bird, Miss. Ellen	female	29.0	0	0	PC 17483	221.7792	C97	S	8	NaN	NaN
+623	3	0	Andersson, Miss. Ebba Iris Alfrida	female	6.0	4	2	347082	31.2750	NaN	S	NaN	NaN	Sweden Winnipeg, MN
+1053	3	0	Nasr, Mr. Mustafa	male	NaN	0	0	2652	7.2292	NaN	C	NaN	NaN	NaN
+605	3	1	Abelseth, Mr. Olaus Jorgensen	male	25.0	0	0	348122	7.6500	F G63	S	A	NaN	Perkins County, SD
+725	3	1	Connolly, Miss. Kate	female	22.0	0	0	370373	7.7500	NaN	Q	13	NaN	Ireland
+900	3	0	Johnston, Master. William Arthur "Willie"	male	NaN	1	2	W./C. 6607	23.4500	NaN	S	NaN	NaN	NaN
+462	2	0	Jefferys, Mr. Clifford Thomas	male	24.0	2	0	C.A. 31029	31.5000	NaN	S	NaN	NaN	Guernsey / Elizabeth, NJ
+705	3	0	Caram, Mr. Joseph	male	NaN	1	0	2689	14.4583	NaN	C	NaN	NaN	Ottawa, ON  
+</textarea>
+
+            <h3>Tendências Centrais:</h3>
+            <p>O ponto central ou típico de um conjunto de dados é representado por medidas estatísticas conhecidas como tendências centrais. A moda, a mediana e a média são componentes que são usados para encontrar o valor central em um conjunto de dados. Essas ações facilitam o resumo e a compreensão das características da distribuição de dados.</p>
+            
+            <h3>Moda</h3>
+            <p>A moda é o valor que aparece com maior frequência em um conjunto de dados. Dependendo do conjunto de dados, a moda pode ser classificada como:</p>
+            
+            <h3>Modal</h3>
+            <p>Quando há apenas um valor que é o mais frequente.</p>
+            <textarea id="codec" readonly>
+modal = pd.DataFrame([35, 37, 36, 34, 38, 35, 37, 37, 33, 36, 38, 37,35, 37, 34, 33, 37, 36, 35, 38, 36, 35, 36, 37, 38, 39, 37, 37, 36, 37, 33, 37, 35, 37, 39])
+modal.mode()
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+0
+0	37
+            </textarea>
+            
+            <h3>Bimodal</h3>
+            <p>Quando existem dois valores que aparecem com a mesma maior frequência.</p>
+            <textarea id="codec" readonly>
+bimodal = pd.DataFrame([1, 0, 2, 3, 1, 4, 5, 1, 0, 3, 0, 7, 8, 9, 0, 1])
+bimodal.mode()
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+0
+0	0
+1	1
+            </textarea>
+
+            <h3>Polimodal</h3>
+            <p>Quando há mais de dois valores com a mesma maior frequência.</p>
+            <textarea id="codec" readonly>
+polimodal = pd.DataFrame([1, 0, 2, 3, 1, 4, 5, 1, 0, 3, 3, 3, 0, 7, 8, 9, 0, 1])
+polimodal.mode()  
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+0
+0	0
+1	1
+2	3              
+            </textarea>
+
+            <h3>Amodal</h3>
+            <p>Quando não há um valor que aparece com maior frequência (todos os valores têm a mesma frequência ou nenhuma moda).</p>
+            <textarea id="codec" readonly>
+amodal = pd.DataFrame([1,2,3,4,5,6,7,8,9])
+amodal.mode().shape[0]
+if amodal.mode().shape[0] == amodal.shape[0]:
+  print("amodal")
+elif amodal.mode().shape[0] == 1:
+  print('bimodal')
+elif amodal.mode().shape[0] == 2:
+  print('bimodal')
+else:
+  print("polimodal")
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+amodal
+            </textarea>
+            <textarea id="codec" readonly>
+##Moda da tabela do titanic df[['pclass','survived','sex','age']].mode()
+df.mode()
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+pclass	survived	name	sex	age	sibsp	parch	ticket	fare	cabin	embarked	boat	body	home.dest
+0	3.0	0.0	Connolly, Miss. Kate	male	24.0	0.0	0.0	CA. 2343	8.05	C23 C25 C27	S	13	1.0	New York, NY
+1	NaN	NaN	Kelly, Mr. James	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	4.0	NaN
+2	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	7.0	NaN
+3	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	9.0	NaN
+4	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	14.0	NaN
+...	...	...	...	...	...	...	...	...	...	...	...	...	...	...
+116	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	312.0	NaN
+117	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	314.0	NaN
+118	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	322.0	NaN
+119	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	327.0	NaN
+120	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	NaN	328.0	NaN
+            </textarea>
+            <p>Plotando gráficos para melhor visualização da moda.</p>
+            <textarea id="codec" readonly>
+# estradificando pela coluna 'pclass'
+df.fillna(0).groupby('pclass').count()
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+survived	name	sex	age	sibsp	parch	ticket	fare	cabin	embarked	boat	body	home.dest
+pclass													
+1	323	323	323	323	323	323	323	323	323	323	323	323	323
+2	277	277	277	277	277	277	277	277	277	277	277	277	277
+3	709	709	709	709	709	709	709	709	709	709	709	709	709
+            </textarea>
+            <textarea id="codec" readonly>
+# Configurando tema escuro para os gráficos
+#plt.style.use("dark_backgorund")
+
+df.fillna(0).groupby('pclass').count().plot(y='name', kind='bar', legend=False,
+                                            ylabel='Number of passengers',
+                                            xlabel='Classes',
+                                            title='Number of passengers per class.')
+            </textarea>
+            <h4>Output:</h4>
+            <img src="./img/grafico1.png" alt="" class="img">
+            <textarea id="codec" readonly>
+df.round().groupby('age').count().plot(y='name', kind='bar', legend=False, figsize=[15,5],
+                                            ylabel='Number of passengers',
+                                            xlabel='Age',
+                                            title='Number of passengers per age.')
+            </textarea>
+            <h4>Output:</h4>
+            <img src="./img/grafico2.png" alt="" class="img">
+
+            <textarea id="codec" readonly>
+columns = ['name', 'age', 'pclass'] #Caso de gerar tabelas especificas
+for column in df.columns:
+  if column != 'name':
+    df.groupby(column).count().plot(y='name', kind='bar', legend=False, figsize=[15,5])
+  else:
+        df.groupby(column).count().plot(y='pclass', kind='bar', legend=False, figsize=[15,5])
+
+  #pclass	survived	name	sex	age	sibsp	parch	ticket	fare	cabin	embarked	boat	body	home.dest
+            </textarea>
+            <h4>Output(1):</h4>
+            <img src="./img/grafico3.png" alt="" class="img">
+
+            <h3>Mediana</h3>
+            <p>A mediana é o valor central de um conjunto de dados quando os valores são ordenados em ordem crescente ou decrescente. Se o número de observações for ímpar, a mediana é o valor do meio. Se for par, a mediana é a média dos dois valores centrais. A mediana é uma medida robusta, menos sensível a valores extremos (outliers) do que a média.</p>
+
+            <p>Número Ímpar e par de elementos</p>
+            <textarea id="codec" readonly>
+medianaPar = pd.DataFrame([1.63, 1.65, 1.72, 1.75, 1.79, 1.80])
+medianaPar.median()
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+0    1.735
+dtype: float64
+            </textarea>
+            <p>Tratando valores ausentes</p>
+            <textarea id="codec" readonly>
+# por padrão o método media() ignora valores NaN
+mediana = pd.DataFrame([1.63, 1.65, 1.72, 1.75, np.NaN, 1.79, np.NaN, 1.80, 1.82])
+mediana.median()
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+0    1.75
+dtype: float64
+            </textarea>
+            <textarea id="codec">
+# podemos incluir valores NaN no cálculo da mediana
+mediana.median(skipna=False)
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+0   NaN
+dtype: float64
+            </textarea>
+            <textarea id="codec" readonly>
+#Outra opção
+mediana.fillna(0).median()
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+0    1.72
+dtype: float64
+            </textarea>
+            <p>Aplicando a Mediana no DataFrame Titanic</p>
+            <textarea id="codec" readonly>
+df.fillna(0).median(numeric_only = True)
+            </textarea>
+            <h4>Output</h4>
+            <textarea id="codec" readonly>
+pclass       3.0000
+survived     0.0000
+age         24.0000
+sibsp        0.0000
+parch        0.0000
+fare        14.4542
+body         0.0000
+dtype: float64
+            </textarea>
+            <textarea id="codec" readonly>
+df.fillna(0).sort_values(by='age').plot(y='age',kind='bar',xticks=[],figsize=[20,4]).bar(x=df['age'].size/2,height=df['age'].max(),color='RED')
+            </textarea>
+            <h4>Output:</h4>
+            <img src="./img/grafico4.png" alt="" class="img">
+            <textarea id="code" readonly>
+numeric_columns=['pclass', 'survived', 'age', 'sibsp', 'parch', 'fare', 'body']
+
+for column in numeric_columns:
+  df.fillna(0).sort_values(by=column).plot(y=column,kind='bar',xticks=[],figsize=[20,4]).bar(x=df[column].size/2,height=df[column].max(),color='RED')
+            </textarea>
+            <h4>Output(1):</h4>
+            <img src="./img/grafico5.png" alt="" class="img">
+
+            <h3>Média</h3>
+            <p>A média, ou média aritmética, é calculada somando todos os valores de um conjunto de dados e dividindo essa soma pelo número de valores. A média é amplamente utilizada, mas pode ser influenciada por valores extremos (outliers), o que pode distorcer a interpretação dos dados.</p>
+            <textarea id="codec" readonly>
+df.mean(numeric_only=True)
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+pclass        2.294882
+survived      0.381971
+age          29.881135
+sibsp         0.498854
+parch         0.385027
+fare         33.295479
+body        160.809917
+dtype: float64
+            </textarea>
+            <p>Plotando um grafico de linha para cada coluna do DataFrame (preencha os valores ausentes com 0)</p>
+            <textarea id="codec" readonly>
+df.fillna(0).plot(figsize=[15,30], subplots=True)
+            </textarea>
+            <h4>Output:</h4>
+            <img src="./img/grafico6.png" alt="" class="img">
+
+            <h3>Percentil</h3>
+            <p>Um conjunto de dados pode ser dividido em cem partes iguais por percentis. O percentil p indica que 100–p% dos dados estão acima do valor e p% estão abaixo dele. A mediana, que divide os dados em duas metades iguais, é o cinquenta percentil, por exemplo.</p>
+
+            <textarea id="codec" readonly>
+percentil = pd.DataFrame([21,23,31,46,54,64,78,89,97,99,105])
+percentil.quantile(0.4)
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+0    54.0
+Name: 0.4, dtype: float64
+            </textarea>
+            <textarea id="codec" readonly>
+percentil.quantile(0.45)
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+0    59.0
+Name: 0.45, dtype: float64
+            </textarea>
+            <textarea id="codec" readonly>
+percentil.quantile([0.4,0.45])
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+0
+0.40	54.0
+0.45	59.0
+            </textarea>
+
+            <h3>Quartil</h3>
+            <p>Um conjunto de dados é dividido em quatro partes iguais por quartis. Os três quartis principais são:</p>
+            <li>Primeiro Quartil (Q1): O valor abaixo do qual 25% dos dados se encontram (25º percentil).</li>
+            <li>Segundo Quartil (Q2): A mediana, o valor central que divide os dados em duas partes iguais (50º percentil).</li>
+            <li>Terceiro Quartil (Q3): O valor abaixo do qual 75% dos dados se encontram (75º percentil).</li>
+            <p>Os quartis, que mostram onde os valores estão em um conjunto de dados, ajudam na compreensão da dispersão e distribuição dos dados.</p>
+            <textarea id="codec" readonly>
+percentil.quantile([0.25,0.5,0.75])
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec">
+0
+0.25	38.5
+0.50	64.0
+0.75	93.0
+            </textarea>
+            <textarea id="codec" readonly>
+percentil.quantile()
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+0    64.0
+Name: 0.5, dtype: float64
+            </textarea>
+            <textarea id="codec" readonly>
+percentil.describe()
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+0
+count	11.000000
+mean	64.272727
+std	31.397742
+min	21.000000
+25%	38.500000
+50%	64.000000
+75%	93.000000
+max	105.000000
+            </textarea>
+            <textarea id="codec" readonly>
+percentil.describe(percentiles=[.1,.25,.3,.5,.75])
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+              0
+count	11.000000
+mean	64.272727
+std	31.397742
+min	21.000000
+10%	23.000000
+25%	38.500000
+30%	46.000000
+50%	64.000000
+75%	93.000000
+max	105.000000
+            </textarea>
+            <textarea id="codec" readonly>
+#Exiba o percentil 30% e todos os quartis para cada coluna do DataFrame Titanic.
+df.quantile([0.25,0.3,0.5,0.75],numeric_only=True)
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+pclass	survived	age	sibsp	parch	fare	body
+0.25	2.0	0.0	21.0	0.0	0.0	7.8958	72.0
+0.30	2.0	0.0	22.0	0.0	0.0	8.0500	96.0
+0.50	3.0	0.0	28.0	0.0	0.0	14.4542	155.0
+0.75	3.0	1.0	39.0	1.0	0.0	31.2750	256.0
+            </textarea>
+            <textarea id="codec" readonly>
+#Utilizando o método describe(), exiba contagem média, desvio padrão, valor mínimo, valor máximo, percentil 10%, 30% e todos os quartis para cada coluna do DataFrame Titanic
+df.describe(percentiles=[.1,.25,.3,.5,.75])
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+pclass	survived	age	sibsp	parch	fare	body
+count	1309.000000	1309.000000	1046.000000	1309.000000	1309.000000	1308.000000	121.000000
+mean	2.294882	0.381971	29.881135	0.498854	0.385027	33.295479	160.809917
+std	0.837836	0.486055	14.413500	1.041658	0.865560	51.758668	97.696922
+min	1.000000	0.000000	0.166700	0.000000	0.000000	0.000000	1.000000
+10%	1.000000	0.000000	14.000000	0.000000	0.000000	7.567500	35.000000
+25%	2.000000	0.000000	21.000000	0.000000	0.000000	7.895800	72.000000
+30%	2.000000	0.000000	22.000000	0.000000	0.000000	8.050000	96.000000
+50%	3.000000	0.000000	28.000000	0.000000	0.000000	14.454200	155.000000
+75%	3.000000	1.000000	39.000000	1.000000	0.000000	31.275000	256.000000
+max	3.000000	1.000000	80.000000	8.000000	9.000000	512.329200	328.000000
+            </textarea>
+
+            <h3>Medidas de Dispersão</h3>
+            <p>A amplitude pela qual os dados variam em torno de um valor central, como a média ou a mediana, é chamada de medida de dispersão. Elas ajudam na compreensão da consistência e da previsibilidade, fornecendo informações sobre a variabilidade e a distribuição dos dados.</p>
+            
+            <h3>Amplitude</h3>
+            <p>A amplitude é a variação entre os valores máximos e mínimos de um conjunto de dados. Oferecendo uma visão simples da dispersão, ela mostra a extensão total da variação dos dados.</p>
+            <textarea id="codec" readonly>
+amplitude = pd.DataFrame([4,6,79,1,64,4,33,4,9,6,4])
+A = amplitude.max()-amplitude.min()
+A
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+0    78
+dtype: int64
+            </textarea>
+            <textarea id="codec" readonly>
+#Atividade
+amp = pd.DataFrame([2.1,2.0,2.2,2.9,2.4])
+a = amp.max()-amp.min()
+if a[0] >= 0.8:
+  print("Rejeitado", "Amplitude", a[0])
+else:
+  print("Aprovado", "Amplitude", a[0])
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+Rejeitado Amplitude 0.8999999999999999
+            </textarea>
+            <textarea id="codec" readonly>
+#Atividade 2
+predios = pd.DataFrame([460,800,300,400])
+a2 = am.max()-am.min()
+a2
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+0    500
+dtype: int64
+            </textarea>
+            <textarea id="codec" readonly>
+#Atividade 3
+df.max(numeric_only=True)-df.min(numeric_only=True)
+            </textarea>
+            <textarea id="codec" readonly>
+pclass        2.0000
+survived      1.0000
+age          79.8333
+sibsp         8.0000
+parch         9.0000
+fare        512.3292
+body        327.0000
+dtype: float64
+            </textarea>
+            <h3>Variância</h3>
+            <p>A variância é uma medida de quão diferentes os valores são da média. Calcula a média dos quadrados das diferenças entre a média do conjunto de dados e todos os valores, dando-lhe uma compreensão mais profunda da variabilidade.</p>
+            <textarea id="codec" readonly>
+predios.var(ddof=0)
+            </textarea>
+            <h4>Output:</h4>
+            <textarea id="codec" readonly>
+0    35300.0
+dtype: float64
+            </textarea>
+            <textarea id="codec" readonly>
+df.var(numeric_only=True, ddof=0)
+            </textarea>
+            <h4>Output</h4>
+            <textarea id="codec" readonly>
+pclass         0.701433
+survived       0.236069
+age          207.550361
+sibsp          1.084223
+parch          0.748622
+fare        2676.911604
+body        9465.806844
+dtype: float64
+            </textarea>
+          </section>
+    </main>
+    <footer>
+        <p>Confira meu <a href="https://colab.research.google.com/drive/1tvsLy3bSAcmwzhqZGCrfEtl5i0VEvzqm?usp=sharing" style="color: white;" target="_blank">Colab</a>.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
